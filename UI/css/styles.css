@@ -6,6 +6,10 @@ body {
   	font-size: 1.2em;
 
 }
+* {
+    box-sizing: border-box;
+}
+
 
 .container {
 	margin: auto;
@@ -17,23 +21,47 @@ body {
 }
 
 
-.auth {
+nav .auth {
 	float: right;
-	
 }
+
+
+
+
+.main-nav  a {
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
 
 .home-btn {
 	background-color: #e3e3e3 !important;
 }
 
+/*.currentm  {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 
-input[type=text] {
+}*/
+
+#del {
+    background-color: orange !important;
+}
+
+input[type=text] ,select, textarea{
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
 }
+
+li {
+    display: inline-block;
+}
+
 
 label {
     padding: 12px 12px 12px 0;
@@ -53,10 +81,6 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
     
-}
-
-input[type=submit]:hover {
-    background-color: #4CD964;
 }
 
 .col-25 {
