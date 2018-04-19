@@ -1,50 +1,50 @@
 body {
 	background: url(../images/bam7.fs);
-	background-color: grey;
+	background-color: rgba(0,0,0, .2);
 	font-family: "Liberation Serif";
-  	color: #0e5a77 !important;
-  	font-size: 1.2em;
+  	font-size: 1.1em;
 
 }
+
 * {
     box-sizing: border-box;
 }
+
+.container {
+    margin: 10px auto;
+    width: 940px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    overflow: hidden;
+}
+
 
 .mynav ul li .logo {
   background-color: orange;
   border: 1px solid orange;
   border-radius: 4px;
   margin-top:  0px;
+  padding:0px 5px;
 }
-
-.container {
-	margin: auto;
-	width: 70%;
-	overflow: hidden;
-	border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
+.mynav ul li .logo h3 {
+    font-family: sans-serif;
 }
-
 
 .mynav ul  .auth li {
 	float: right;
 }
 
-nav .auth {
-    float: right;
-}
-
-
-
 .mynav ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
     overflow: hidden;
-    background-color: #333333;
-    border-radius: 5px;
+    background-color: rgba(0,0,0, .3);
+    border-radius: 2px;
 }
+
+.mynav {
+    box-shadow: 0 10px 10px rgba(0,0,0,.4);
+} 
 
 .mynav li {
     float: left;
@@ -58,20 +58,8 @@ nav .auth {
     text-decoration: none;
 }
 
-.mynav li a:hover {
-    background-color: #111111;
-}
-
-
-
-.main-nav  a {
-    text-decoration: none;
-    color: #00bbff;
-}
-
-
-.home-btn {
-	background-color: #e3e3e3 !important;
+.mynav li a : hoover {
+    color: rgba(0,0,0, 1);
 }
 
 header img {
@@ -80,8 +68,6 @@ header img {
     height: 300px;
     background:no-repeat right 0px;
 }
-
-
 
 figure{
     margin: 0;
@@ -93,27 +79,18 @@ figure{
     overflow: hidden;
 }
 
-
-/*figure:hover figcaption {
-    opacity: 1;
-    top: 0;
-
-    
-}*/
 figcaption {
     opacity: 1;
     position: absolute;
-    height: 150%;
+    height: 100%;
     width: 100%;
     top: 0%;
-    background-color: rgba(0,0,0,.4);
+    background-color: rgba(0,0,0,.5);
     color: white;
     padding: 20px;
-    -webkit-box-sizing:border-box;
+
     -webkit-transition:all .4s ease-in;
     -webkit-transition-delay:.4s;
-    -
-
 }
 
 
@@ -132,16 +109,8 @@ figcaption p {
 }
 
 
-/*.currentm  {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-
-}*/
-
 #del {
-    background-color: orange !important;
+    background-color: #55D6BE !important;
 }
 
 input[type=text] ,select, textarea{
@@ -167,23 +136,9 @@ dd ul li ,.cmeals ul li,.dayorders ul li {
 
 }
 
-/*.cmeals ul li {
-     width: 50%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-top: 10px;
-    background-color: #f9be4a;
-    padding: 7px 20px;
-}
-*/
-
 label {
     padding: 12px 12px 12px 0;
     display: inline-block;
-}
-
-.greensignin {
-	background-color: #4CD964 !important;
 }
 
 
@@ -197,19 +152,21 @@ input[type=submit] {
     
 }
 
+
 .col-25 {
-    /*float: left;*/
+    
     width: 25%;
     margin-top: 6px;
 }
 
 .col-75 {
-    /*float: left;*/
+    
     width: 75%;
     margin-top: 6px;
 }
 
 /* Clear floats after the columns */
+
 .row:after {
     content: "";
     display: table;
@@ -218,18 +175,34 @@ input[type=submit] {
 
 footer {
 	color: black;
-    float: right;
+    float: left;
+    text-align-last: right;
+    margin-top: 10px;
+    background-color: rgba(0,0,0, .3);
+    width: 100%;
+    border-radius: 4px;
+    padding-right: 5px;
+
 }
 
-  
-
-/* Responsive layout - when the screen is less than 600px wide,
- make the two columns stack on top of each other instead of next to each other */
 
 
-@media screen and (max-width: 600px) {
-    .col-25, .col-75, input[type=submit] {
-        width: 100%;
-        margin-top: 0;
-    }
-}
+
+  /* Media queries*/
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+        .container                                  { width: 768px; }
+
+
+
+@media only screen and (min-width: 520px) (max-width: 767px) {
+        .container { width: 520px ; }
+        .container .mynav {
+
+        }
+        footer {
+
+        }
+
+@media only screen and (min-width: 400px) (max-width: 520px) {
+        .container { width: 300px; }
