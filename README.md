@@ -14,9 +14,18 @@ Open index.html with your favorite browser.
 
 Test the different routing of the UI pages.
 
-###Githubpages
+###GitHubPages
 
-Visit site ```https://kwanj-k.github.io/Book_A_Meal/```
+
+To see the static site [click here](https://kwanj-k.github.io/Book_A_Meal/)
+
+>An image of the Landing Page.
+
+![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/UI/images/b-a-m.png))
+
+### My Github repo
+
+```https://github.com/kwanj-k```
 
 #### Contribution
 Fork the repo, create a PR to this repository's develop.
