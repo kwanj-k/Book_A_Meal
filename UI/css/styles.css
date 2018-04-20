@@ -3,6 +3,8 @@ body {
     background-color: rgba(0,0,0, .2);
     font-family: "Liberation Serif";
     font-size: 1.2em;
+    color: #000004;
+
 
 }
 
@@ -51,6 +53,12 @@ body {
     box-shadow: 0 10px 10px rgba(0,0,0,.4);
 } 
 
+.mynav ul li.active {
+    background-color: #555;
+    color: white;
+    border-radius: 6px;
+}
+
 .mynav li {
     float: left;
 }
@@ -82,6 +90,19 @@ li a:hover{
     margin: 10px 0px ;
 
 
+}
+
+.toggle .bam {
+    background-color: orange;
+    border-radius: 6px;
+    
+}
+
+.toggle h3 {
+    font-size: 35px;
+    font-family: sans-serif;
+    padding: 4px;
+    display: inline-block;
 }
 
 .toggle ul {
@@ -134,10 +155,9 @@ figcaption {
     height: 100%;
     width: 100%;
     top: 0%;
-    background-color: rgba(0,0,0,.5);
-    color: white;
+    background-color: rgba(0,0,0,.6);
     padding: 20px;
-
+    color: #FBFEF9;
     transition:all .4s ease-in;
     transition-delay:.4s;
 }
@@ -155,6 +175,8 @@ figcaption p {
     padding: 10px;
     margin-top: 0px;
     margin-bottom: 0px;
+    font-size: 1.2em;
+
 }
 
 
@@ -178,6 +200,8 @@ input[type=text] ,select, textarea{
     border-radius: 4px;
     resize: vertical;
 }
+
+
 
 li {
     display: inline-block;
@@ -210,6 +234,10 @@ input[type=submit] {
     
 }
 
+input[type="submit"]:hover {
+    border: 1px solid #999;
+    color: white;
+}
 
 .col-25 {
     
@@ -224,11 +252,11 @@ input[type=submit] {
 }
 
 
-.row:after {
+/*.row:after {
     content: "";
     display: table;
     clear: both;
-}
+}*/
 
 table {
     border-collapse: collapse;
@@ -240,7 +268,7 @@ th, td {
     padding: 8px;
 }
 
-tr:nth-child(even){background-color: #F2AF29;}
+tr:nth-child(even){background-color: #F1D9A7;}
 
 footer {
     color: black;
@@ -282,6 +310,7 @@ footer {
 @media only screen and (max-width: 700px){
     .mynav {display: none;}
     .toggle {display: block;}
+    footer {display: none;}
     
     }
 
