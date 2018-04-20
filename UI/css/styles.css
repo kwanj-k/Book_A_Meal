@@ -2,7 +2,7 @@ body {
     background: url(../images/bam7.fs);
     background-color: rgba(0,0,0, .2);
     font-family: "Liberation Serif";
-    font-size: 1.1em;
+    font-size: 1.2em;
 
 }
 
@@ -17,7 +17,7 @@ body {
     background-color: #f2f2f2;
     padding: 20px;
     overflow: hidden;
-    height: 100%;
+
 
 }
 
@@ -221,6 +221,18 @@ input[type=submit] {
     clear: both;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #F2AF29;}
+
 footer {
     color: black;
     float: left;
@@ -233,11 +245,30 @@ footer {
 
 }
 
-@media only screen and (max-width: 1050px){.container {width: 80%}}
+@media only screen and (max-width: 1250px){
+        .container {width: 80%}
+        .mynav li a {padding: 10px;}
+        .mynav ul li .logo{padding: 0px;}
 
-@media only screen and (max-width: 940px){.container {width: 90%}}
+    }
 
-@media only screen and (max-width: 840px){.container {width: 100%}}
+@media only screen and (max-width: 1000px){
+    .container {width: 90%}
+    .mynav li a {padding: 4px;}
+    .mynav ul li .logo{padding: 0px;}
+    
+    
+
+    }
+
+@media only screen and (max-width: 900px){
+    .container {width: 100%}
+    .mynav li a {padding: 4px;}
+    .mynav ul li .logo{padding: 0px;}
+    
+
+
+    }
 
 @media only screen and (max-width: 700px){
     .mynav {display: none;}

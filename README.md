@@ -14,7 +14,7 @@ Open index.html with your favorite browser.
 
 Test the different routing of the UI pages.
 
-###Gitpages
+###Githubpages
 
 Visit site ```https://kwanj-k.github.io/Book_A_Meal/```
 
