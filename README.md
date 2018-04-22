@@ -2,6 +2,9 @@
 
 Application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
 
+The application is managed using PivotalTracker board.[click here](https://www.pivotaltracker.com/n/projects/2165483)to see.
+
+
 ### Development
 
 Clone the repository: 
