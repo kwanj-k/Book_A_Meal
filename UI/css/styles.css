@@ -1,3 +1,7 @@
+
+
+/*General styling */
+
 body {
     background: url(../images/bam7.fs);
     background-color: rgba(0,0,0, .2);
@@ -23,6 +27,7 @@ body {
 
 }
 
+/*Main navigation on a big screen*/
 
 .mynav ul li .logo {
   background-color: orange;
@@ -70,11 +75,18 @@ body {
     padding: 16px;
     text-decoration: none;
 }
+
+
+/*all anchor tags on hover*/
+
 li a:hover{
     background-color: #555;
     color: white;
     border-radius: 6px;
 }
+
+
+/*subtitute navigation on small screen*/
 
 .toggle {
     width: 100%;
@@ -132,6 +144,8 @@ li a:hover{
     
 }
 
+/*Intruductory/About segment*/
+
 header img {
     position: relative;
     width:100%;
@@ -179,10 +193,13 @@ figcaption p {
 
 }
 
+/*all delete buttons*/
 
 #del {
     background-color: #55D6BE !important;
 }
+
+/*price box styling*/
 
 .price {
     margin: 0 2px;
@@ -193,34 +210,14 @@ figcaption p {
     border-radius: 6px;
 }
 
+/*Buttons*/
+
 input[type=text] ,select, textarea{
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
-}
-
-
-
-li {
-    display: inline-block;
-   
-}
-dd ul li ,.cmeals ul li,.dayorders ul li {
-    width: 50%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-top: 10px;
-    background-color: #f9be4a;
-    padding: 7px 20px;
-    
-
-}
-
-label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
 }
 
 
@@ -239,6 +236,32 @@ input[type="submit"]:hover {
     color: white;
 }
 
+
+
+li {
+    display: inline-block;
+   
+}
+
+/*description lists,summary of orders and current meals*/
+dd ul li ,.cmeals ul li,.dayorders ul li {
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 10px;
+    background-color: #f9be4a;
+    padding: 7px 20px;
+    
+
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+/*columns for positioning the forms*/
+
 .col-25 {
     
     width: 25%;
@@ -252,11 +275,7 @@ input[type="submit"]:hover {
 }
 
 
-/*.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}*/
+/*orders detail table*/
 
 table {
     border-collapse: collapse;
@@ -270,6 +289,12 @@ th, td {
 
 tr:nth-child(even){background-color: #F1D9A7;}
 
+
+input[type=checkbox] {
+    margin: 10px 0px;
+
+}
+
 footer {
     color: black;
     float: left;
@@ -281,6 +306,8 @@ footer {
     padding-right: 5px;
 
 }
+
+/*media queries*/
 
 @media only screen and (max-width: 1250px){
         .container {width: 80%}
@@ -298,7 +325,7 @@ footer {
 
     }
 
-@media only screen and (max-width: 900px){
+@media only screen and (max-width: 920px){
     .container {width: 100%}
     .mynav li a {padding: 4px;}
     .mynav ul li .logo{padding: 0px;}
@@ -307,7 +334,7 @@ footer {
 
     }
 
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 710px){
     .mynav {display: none;}
     .toggle {display: block;}
     footer {display: none;}
