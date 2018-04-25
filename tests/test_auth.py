@@ -12,9 +12,9 @@ class TestAuthenitication(unittest.TestCase):
 
     def test_signup(self):
     	#Tests signup 
-    	response = self.app.post('/api/v1/register', 
-    		data = json.dumps(self.data) , content_type = 'application/json')
-    	self.assertEqual(response.status_code, 201)
+        response = self.app.post('/api/v1/register', 
+            data = json.dumps(self.data) , content_type = 'application/json')
+        self.assertEqual(response.status_code, 201)
         result = json.loads(response.data)
         self.assertEqual(result["username"], "zeus")
         self.assertEqual(result["email"], "email@gmail.com")
