@@ -17,7 +17,7 @@ class TestOrders(unittest.TestCase):
                       content_type = 'application/json')
 
         self.assertEqual(response.status_code, 201)
-        result = json.loads(response.data)
+        result = json.loads(response.data.decode())
         self.assertEqual(result["item"], "fried chicken")
 
     def test_get_orders(self):

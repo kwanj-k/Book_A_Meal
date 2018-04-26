@@ -12,7 +12,7 @@ class TestAuthenitication(unittest.TestCase):
 
     def test_login(self):
         response = self.app.get('/api/v1/login')
-        result = json.loads(response.data)
+        result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "You are logged in")
         self.assertEqual(response.status_code, 200)
 
@@ -20,7 +20,7 @@ class TestAuthenitication(unittest.TestCase):
         response = self.app.post('/api/v1/register',
          data = json.dumps(self.data) , content_type = 'application/json')
         self.assertEqual(response.status_code, 201)
-        result = json.loads(response.data)
+        result = json.loads(response.data.decode())
         self.assertEqual(result["username"], "zeus")
         self.assertEqual(result["email"], "email@gmail.com")
         self.assertEqual(result["password"], "4084")
@@ -35,7 +35,7 @@ class TestAuthenitication(unittest.TestCase):
     			data = json.dumps(self.data) , content_type = 'application/json'
     		)
     	self.assertEqual(response.status_code, 201)
+    	result = json.loads(response.data.decode())
     	
-
 if __name__ == '__main__':
     unittest.main()

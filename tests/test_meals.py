@@ -17,10 +17,7 @@ class TestMeal(unittest.TestCase):
                      data = json.dumps(self.data) ,
                       content_type = 'application/json')
         self.assertEqual(response.status_code, 201)
-        result = json.loads(response.data)
-        self.assertEqual(result["name"], "lunch")
         
-
     def test_get_meals(self):
         res = self.app.get('/api/v1/meals')
         self.assertEqual(res.status_code, 200)
