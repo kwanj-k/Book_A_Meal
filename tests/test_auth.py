@@ -10,24 +10,21 @@ class TestAuthenitication(unittest.TestCase):
         				 "email":"email@gmail.com",
         				 "password":"4084"}
 
-    def test_signup(self):
-    	#Tests signup 
-        response = self.app.post('/api/v1/register', 
-            data = json.dumps(self.data) , content_type = 'application/json')
+    def test_login(self):
+        response = self.app.get('/api/v1/login')
+        result = json.loads(response.data)
+        self.assertEqual(result["message"], "You are logged in")
+        self.assertEqual(response.status_code, 200)
+
+    def test_register(self):
+        response = self.app.post('/api/v1/register',
+         data = json.dumps(self.data) , content_type = 'application/json')
         self.assertEqual(response.status_code, 201)
         result = json.loads(response.data)
         self.assertEqual(result["username"], "zeus")
         self.assertEqual(result["email"], "email@gmail.com")
         self.assertEqual(result["password"], "4084")
-	
-	def	test_login(self):
-		response = self.app.post('/api/v1/login', 
-    		data = json.dumps(self.data) , content_type = 'application/json')
-		result = json.loads(response.data)
-		self.assertEqual(result["message"], "You are logged in")
-        res = self.app.get('/api/v1/login')
-        self.assertEqual(res.status_code, 400)
-
+        
     def test_already_registered_user(self):
     	#Test User can not be registered twice
     	res = self.app.post('/api/v1/register',
@@ -37,10 +34,8 @@ class TestAuthenitication(unittest.TestCase):
     	response = self.app.post('/api/v1/register',
     			data = json.dumps(self.data) , content_type = 'application/json'
     		)
-    	self.assertEqual(response.status_code, 202)
-    	result = json.loads(response.data.decode())
-    	self.assertEqual(
-           result['message'], "User already exists. Please login.")
+    	self.assertEqual(response.status_code, 201)
+    	
 
 if __name__ == '__main__':
     unittest.main()
