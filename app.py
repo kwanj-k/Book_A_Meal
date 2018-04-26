@@ -3,6 +3,8 @@ from flask_restful import reqparse, abort, Api, Resource
 from resources.meal import Meal,MealList
 from resources.menu import Menu,MenuList
 from resources.order import Order,OrderList
+from flask_jwt import JWT, jwt_required, current_identity
+from werkzeug.security import safe_str_cmp
 
 
 app = Flask(__name__)
