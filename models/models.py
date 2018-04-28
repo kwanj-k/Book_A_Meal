@@ -1,3 +1,29 @@
+class Meal:
+    count = 1
+    def __init__(self, name):
+        self.name   = name
+        self.id     = Meal.count
+        Meal.count += 1
+    def json_dump(self):
+        return dict(
+            name=self.name,
+            id=self.id)
+
+
+
+
+class Db(object):
+   
+    meals = []
+
+    @classmethod
+    def get_meal(cls, id):
+        for meal in cls.meals:
+            if meal.id == id:
+                return meal
+
+
+
 class Accounts(object):
     def __init__(self):
 
@@ -35,4 +61,5 @@ class Accounts(object):
               dict_for_each_account['password'] = password
               self.list_of_accounts.append(dict_for_each_account)
             
-        return "Your account is now registered please proceed to login"
+        return "Your account is now registered please proceed to login"   
+            

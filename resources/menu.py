@@ -1,10 +1,6 @@
 from flask_restful import reqparse, abort, Api, Resource
 
-MENUS = {
-    'menu1': {'name': 'Tea'},
-    'menu2': {'name': 'Ugali'},
-    'menu3': {'name': 'Fish'},
-}
+MENUS = {}
 
 
 

@@ -1,10 +1,6 @@
 from flask_restful import reqparse, abort, Api, Resource
 
-ORDERS = {
-    'order1': {'item': 'Tea'},
-    'order2': {'item': 'Ugali'},
-    'order3': {'item': 'Fish'},
-}
+ORDERS = {}
 
 
 

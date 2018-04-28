@@ -1,6 +1,9 @@
-from app import app
+from app import create_app
 import unittest
 import json
+
+config_name = "testing"
+app = create_app(config_name)
 
 class TestOrders(unittest.TestCase):
     def setUp(self):

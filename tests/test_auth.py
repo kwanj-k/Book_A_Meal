@@ -1,6 +1,9 @@
-from app import app
+from app import create_app
 import unittest
 import json
+
+config_name = "testing"
+app = create_app(config_name)
 
 class TestAuthenitication(unittest.TestCase):
     def setUp(self):
@@ -19,7 +22,7 @@ class TestAuthenitication(unittest.TestCase):
     def test_register(self):
         response = self.app.post('/api/v1/register',
          data = json.dumps(self.data) , content_type = 'application/json')
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 201
         result = json.loads(response.data.decode())
         self.assertEqual(result["username"], "zeus")
         self.assertEqual(result["email"], "email@gmail.com")
