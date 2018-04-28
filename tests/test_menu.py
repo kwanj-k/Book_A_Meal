@@ -12,8 +12,8 @@ class TestMenu(unittest.TestCase):
 
         self.app = app.test_client()
 
-        self.data = {
-                        "name":"fried chicken"
+        self.data = {   "meal":"breakfast",
+                        "item":"fried chicken"
         				 }
        
     def test_create_menu(self):

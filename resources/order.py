@@ -1,44 +1,36 @@
-from flask_restful import reqparse, abort, Api, Resource
+from flask import json, request,jsonify
+from flask_restful import Resource,reqparse,abort
+from models.models import Order,Db
 
-ORDERS = {}
-
-
-
-
-def abort_if_order_doesnt_exist(order_id):
-    if order_id not in ORDERS:
-        abort(404, message="Order {} doesn't exist".format(order_id))
-
-
-parser = reqparse.RequestParser()
-parser.add_argument('item')
-
-#orders
-
-class Order(Resource):
-    def get(self, order_id):
-        abort_if_order_doesnt_exist(order_id)
-        return ORDERS[order_id]
-
-    def delete(self, order_id):
-        abort_if_order_doesnt_exist(order_id)
-        del ORDERS[order_id]
-        return '', 204
-
-    def put(self, order_id):
-        args = parser.parse_args()
-        item = {'item': args['item']}
-        ORDERS[order_id] = item
-        return item, 201
-
-
-class OrderList(Resource):
+class OrderResource(Resource):
+    """
+    Create a Order Resource with GET, POST, PUT and DELETE methods
+    """
+    
     def get(self):
-        return ORDERS
+        orders = Db.orders
+        response = [order.json_dump() for order in orders]
+        return {"status": "success", "data": response}, 200
 
     def post(self):
-        args = parser.parse_args()
-        order_id = int(max(ORDERS.keys()).lstrip('order')) + 1
-        order_id = 'order%i' % order_id
-        ORDERS[order_id] = {'item': args['item']}
-        return ORDERS[order_id], 201
+        json_data = request.get_json(force=True)
+        order = Order(item=json_data['item'],quantity=json_data['quantity'])
+        Db.orders.append(order)
+        response = json.loads(json.dumps(order.json_dump()))
+        return {"status": "success", "data": response}, 201
+
+    def put(self, id):
+        json_data = request.get_json(force=True)
+        order = Db.orders[id]
+        Db.orders.remove(order)
+        order = Order(item=json_data['item'],quantity=json_data['quantity'])
+        Db.orders.append(order)
+        response = json.loads(json.dumps(order.json_dump()))
+        return{"status": "success", "data": response}, 201
+
+    def delete(self, id):
+        json_data = request.get_json(force=True)
+        meal = Db.meals[id]
+        Db.meals.remove(meal)
+        response = json.loads(json.dumps(json_data))
+        return {"status": "deleted", "data": response}, 200

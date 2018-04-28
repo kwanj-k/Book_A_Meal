@@ -10,7 +10,12 @@ class TestOrders(unittest.TestCase):
         app.testing = True
         self.app = app.test_client()
         self.data = {
-                        "item":"fried chicken"
+                        "item":"chicken",
+                        "quantity":1
+        				 }
+        self.data1 = {
+                        "item":"chicken",
+                        "quantity":2
         				 }
        
     def test_create_orders(self):
@@ -20,8 +25,6 @@ class TestOrders(unittest.TestCase):
                       content_type = 'application/json')
 
         self.assertEqual(response.status_code, 201)
-        result = json.loads(response.data.decode())
-        self.assertEqual(result["item"], "fried chicken")
 
     def test_get_orders(self):
         res = self.app.get('/api/v1/orders')
@@ -29,16 +32,13 @@ class TestOrders(unittest.TestCase):
 
     def test_Orders_update(self):
         #Tests orders update
-        response = self.app.put(
-                                '/api/v1/orders/1',
-                                data={
-                                'item':'chai'}
-            )
+        self.app.post('/api/v1/orders',
+                     data = json.dumps(self.data) ,
+                      content_type = 'application/json')
+        response = self.app.put('/api/v1/orders/0',
+                     data = json.dumps(self.data1) ,
+                      content_type = 'application/json')
         self.assertEqual(response.status_code, 201)
-        res = self.app.get(
-                '/api/v1/orders/1'
-            )
-        self.assertIn('chai', str(res.data))
         
 if __name__ == '__main__':
     unittest.main()

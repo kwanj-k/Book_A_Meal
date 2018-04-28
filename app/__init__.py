@@ -2,8 +2,8 @@ from flask import Flask,request,jsonify,make_response
 from flask_restful import reqparse, abort, Api, Resource
 from instance.config import app_config
 from resources.meal import MealResource
-from resources.menu import Menu,MenuList
-from resources.order import Order,OrderList
+from resources.menu import MenuResource
+from resources.order import OrderResource
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -13,11 +13,6 @@ def create_app(config_name):
 
 
     api.add_resource(MealResource, '/api/v1/meals', '/api/v1/meals/<int:id>')
-
-    api.add_resource(MenuList, '/api/v1/menus')
-    api.add_resource(Menu, '/api/v1/menus/<menu_id>')
-
-    api.add_resource(OrderList, '/api/v1/orders')
-    api.add_resource(Order, '/api/v1/orders/<order_id>')
-
+    api.add_resource(MenuResource, '/api/v1/menus', '/api/v1/menus/<int:id>' )
+    api.add_resource(OrderResource, '/api/v1/orders', '/api/v1/orders/<int:id>' )
     return app
