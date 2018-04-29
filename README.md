@@ -1,5 +1,5 @@
 ### Book_A_Meal_The_App
-[![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=develop)](https://travis-ci.org/kwanj-k/Book_A_Meal)
+[![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=develop)](https://travis-ci.org/kwanj-k/Book_A_Meal)[![Coverage Status](https://coveralls.io/repos/github/kwanj-k/Book_A_Meal/badge.svg?branch=develop)](https://coveralls.io/github/kwanj-k/Book_A_Meal?branch=master)
 ### My Github repo
 
 ```https://github.com/kwanj-k```
