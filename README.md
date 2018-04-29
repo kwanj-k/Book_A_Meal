@@ -1,5 +1,5 @@
 ### Book_A_Meal_The_App
-
+[![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=develop)](https://travis-ci.org/kwanj-k/Book_A_Meal)
 ### My Github repo
 
 ```https://github.com/kwanj-k```
