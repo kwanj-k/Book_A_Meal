@@ -5,8 +5,9 @@
 ```https://github.com/kwanj-k```
 
 #### Description
-Application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
-The repo contains a UI and a Flask API.
+This is an Application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
+
+This repo contains a UI and a Flask API for the book_a_meal app.
 
 The application is managed using PivotalTracker board, [click here](https://www.pivotaltracker.com/n/projects/2165483) to see.
 
@@ -55,8 +56,9 @@ The API endpoints are:
 
 
 # Book_A_Meal_UI
-This is a user interface made simply with just HTML and CSS and hosted on github pages.
-It is made up of different static pages of what the book_a_meal app offers. 
+This is the user interface made simply with HTML and CSS and hosted on github pages.
+
+It is made up of different static pages to showcase the different funtionalities book_a_meal app offers. 
 
 ### Testing the UI
 After setting up as described up above on the development section. OPen:
@@ -74,11 +76,11 @@ To see the static site [click here](https://kwanj-k.github.io/Book_A_Meal/)
 
 >An image of the SignUp Page on a tablet.
 
-![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/gh-pages/UI/images/signup.png)
+![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/ft-tests-001/UI/images/signup.png)
 
 >An image of the detailed orders Page.
 
-![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/gh-pages/UI/images/detail.png)
+![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/ft-tests-001/UI/images/detail.png)
 
 
 
