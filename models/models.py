@@ -37,50 +37,35 @@ class Order:
 
 
 class Db(object):
-    meals  = []
-    menus  = []
-    orders = []
+    meals            = []
+    menus            = []
+    orders           = []
+    user_accounts    = []
+    caterer_accounts = []
+
+    @classmethod
+    def get_user(cls, email, password):
+        for user in cls.user_accounts or cls.caterer_accounts:
+            if user.email == email and user.password == password:
+                return user
 
     
+class Account:
+    count = 1
+    def __init__(self,username,email,password,user_type=1):
+        self.id        = Account.count
+        self.username  = username
+        self.email     = email
+        self.password  = password
+        self.user_type = user_type
+        Account.count += 1
+
+    def get_user_type(self,num):
+        if num == 1:
+            return 'customer'
+        elif num == 2:
+            return 'caterer'
 
 
 
-# class Accounts(object):
-#     def __init__(self):
-
-#         self.list_of_accounts = [{'username':'admin',
-#                                   'email':'admin@user.com',
-#                                   'password':'4084'},
-
-#                                   {'username':'user',
-#                                   'email':'user@user.com',
-#                                   'password':'4084'},
-                                  
-#                                   ]
-
-
-#     def login(self, email, passwordd):
-#         """Method for  Handling Login Requests"""
-#         for account in self.list_of_accounts:
-#             if email == account['email']:
-#                 if password == account['password']:
-#                     return "Success!"
-#                 else:
-#                     return "Invalid email, password combination"
-#         return "Account not registered, sign up"
-
-#     def registration(self, username, email, password):
-#         """Method for creating new accounts."""
-#         dict_for_each_account = {}
-
-#         for account in self.list_of_accounts:
-#             if email == account['email']:
-#                 return "Your Account Already Active. Proceed to login"
-#             else:
-#               dict_for_each_account['username'] = username
-#               dict_for_each_account['email'] = email
-#               dict_for_each_account['password'] = password
-#               self.list_of_accounts.append(dict_for_each_account)
-            
-#         return "Your account is now registered please proceed to login"   
-            
+    

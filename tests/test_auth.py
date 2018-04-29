@@ -11,34 +11,28 @@ class TestAuthenitication(unittest.TestCase):
         self.app = app.test_client()
         self.data = {"username":"zeus",
         				 "email":"email@gmail.com",
-        				 "password":"4084"}
-
-    def test_login(self):
-        response = self.app.get('/api/v1/login')
-        result = json.loads(response.data.decode())
-        self.assertEqual(result["message"], "You are logged in")
-        self.assertEqual(response.status_code, 200)
+        				 "password":"4084",
+                         "user_type":1
+                  
+                         }
+        self.data1 = {
+        				 "email":"email@gmail.com",
+        				 "password":"4084",
+                         }
 
     def test_register(self):
-        response = self.app.post('/api/v1/register',
-         data = json.dumps(self.data) , content_type = 'application/json')
-        self.assertEqual(response.status_code, 201
-        result = json.loads(response.data.decode())
-        self.assertEqual(result["username"], "zeus")
-        self.assertEqual(result["email"], "email@gmail.com")
-        self.assertEqual(result["password"], "4084")
-        
-    def test_already_registered_user(self):
-    	#Test User can not be registered twice
-    	res = self.app.post('/api/v1/register',
-    			data = json.dumps(self.data) , content_type = 'application/json'
-    		)
-    	self.assertEqual(res.status_code, 201)
-    	response = self.app.post('/api/v1/register',
-    			data = json.dumps(self.data) , content_type = 'application/json'
-    		)
-    	self.assertEqual(response.status_code, 201)
-    	result = json.loads(response.data.decode())
+        response = self.app.post("/api/v1/auth/register", 
+                    data=json.dumps(self.data),
+                            content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+       
+    def test_login(self):
+        self.app.post("/api/v1/auth/register", 
+                    data=json.dumps(self.data),
+                            content_type='application/json')
+        res    = self.app.post("/api/v1/auth/login", 
+                    data=json.dumps(self.data1),
+                             content_type='application/json')
+        self.assertEqual(res.status_code, 200)
+
     	
-if __name__ == '__main__':
-    unittest.main()
