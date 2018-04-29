@@ -1,0 +1,66 @@
+FORMAT: 1A
+
+HOST: http://127.0.0.1:5000/api/v1
+
+
+# Book_A_Meal_API
+This is an Application that allows customers to make food orders
+ and helps the food vendor know what the customers want to eat.
+
+# Group Meals
+
+Resources related to meals in the API.
+
+## Meals Collection [/meals]
+
+### List All Meals [GET]
+            
++ Response 200 (application/json)
+
+
+
+### Create a New Meal [POST]
+
++ Attributes
+    + name: `lunch` (string) - Meal name
+
++ Request (application/json)
+
+        {
+          "name": "lunch"
+        }
+
++ Response 201 (application/json)
+
+### Update a meal [PUT /meals/{id}]
+Update a specific meal 
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+
+    + Attributes
+        - name: `lunch` (string)
+
++ Parameter
+    + id: `1` - The ID of the meal
+
++ Response 200 (application/json)
+    + Attributes
+        - status: 200 (number) - The response status
+
+### Delete a meal [DELETE /meal/{id}]
+delete a meal give it id
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            
++ Parameter
+    + id: `1` - The ID of the meal
+
++ Response 200 (application/json)
+    + Attributes
+        - status: 200 (number) - The response status
