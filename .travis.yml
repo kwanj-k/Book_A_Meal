@@ -1,11 +1,12 @@
 language: python
 python:
- - "3.5.2"
-# Install dependencies
+  - 3.5.2
 install:
   - pip install -r requirements.txt
-# Run tests
-script:
-  nosetests 
+script: nosetests
 env:
   - FLASK_VERSION=0.12.2
+# before_install:
+#   - npm install -g dredd@5.1.6
+# before_script:
+#   - dredd

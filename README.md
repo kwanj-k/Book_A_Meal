@@ -74,15 +74,13 @@ To see the static site [click here](https://kwanj-k.github.io/Book_A_Meal/)
 
 ![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/gh-pages/UI/images/b-a-m.jpg)
 
->An image of the SignUp Page on a tablet.
+<!-- >An image of the SignUp Page on a tablet.
 
 ![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/master/UI/images/signup.png)
 
 >An image of the detailed orders Page.
 
-![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/mater/UI/images/detail.png)
-
-
+![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/mater/UI/images/detail.png) -->
 
 #### Contribution
 Fork the repo, create a PR to this repository's develop.
