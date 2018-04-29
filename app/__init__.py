@@ -1,6 +1,6 @@
 from flask import Flask,request,jsonify,make_response
 from flask_restful import reqparse, abort, Api, Resource
-from instance.config import app_config
+from config import app_config
 from resources.meal import MealResource
 from resources.menu import MenuResource
 from resources.order import OrderResource
