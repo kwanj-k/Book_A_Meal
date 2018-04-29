@@ -76,11 +76,11 @@ To see the static site [click here](https://kwanj-k.github.io/Book_A_Meal/)
 
 >An image of the SignUp Page on a tablet.
 
-![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/gh-pages/UI/images/signup.png)
+![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/ft-readme/images/signup.png)
 
 >An image of the detailed orders Page.
 
-![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/gh-pages/UI/images/detail.png)
+![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/ft-readme/images/detail.png)
 
 
 
