@@ -9,29 +9,29 @@ class Meal:
             name=self.name,
             id=self.id)
 
-class Menu:
+class Menu(Meal):
     count = 1
-    def __init__(self,meal, item):
+    def __init__(self,name, item):
+        Meal.__init__(self,name)
         self.id     = Menu.count
-        self.meal   = Meal(self.id)
         self.item   = item
         Menu.count += 1
     def json_dump(self):
         return dict(
-            meal=self.meal.json_dump(),
+            name=self.name,
             item=self.item,
             id=self.id)
 
-class Order:
+class Order(Menu):
     count = 1
-    def __init__(self,item, quantity=1):
-        self.id         = Order.count
-        self.item       = item
+    def __init__(self,name,item, quantity=1):
+        Menu.__init__(self,name,item)
         self.quantity   = quantity
         Order.count += 1
     def json_dump(self):
         return dict(
-            menu=self.item,
+            name=self.name,
+            item = self.item,
             quantity=self.quantity,
             id=self.id)
 
@@ -65,7 +65,3 @@ class Account:
             return 'customer'
         elif num == 2:
             return 'caterer'
-
-
-
-    

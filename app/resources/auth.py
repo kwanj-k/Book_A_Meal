@@ -1,6 +1,6 @@
 from flask import json, request,jsonify
 from flask_restful import Resource,reqparse,abort
-from models.models import Account,Db
+from app.models import Account,Db
 
 class LoginResource(Resource):
     def post(self):

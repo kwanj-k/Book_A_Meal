@@ -1,6 +1,6 @@
 from flask import json, request,jsonify
 from flask_restful import Resource
-from models.models import Menu,Db
+from app.models import Menu,Db
 
 class MenuResource(Resource):
     """
@@ -14,7 +14,7 @@ class MenuResource(Resource):
 
     def post(self):
         json_data = request.get_json(force=True)
-        menu = Menu(meal=json_data['meal'], item=json_data['item'])
+        menu = Menu(name=json_data['name'], item=json_data['item'])
         Db.menus.append(menu)
         response = json.loads(json.dumps(menu.json_dump()))
         return {"status": "success", "data": response}, 201

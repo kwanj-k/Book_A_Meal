@@ -1,6 +1,6 @@
 from flask import json, request,jsonify
 from flask_restful import Resource,reqparse,abort
-from models.models import Order,Db
+from app.models import Order,Db
 
 class OrderResource(Resource):
     """
@@ -14,7 +14,9 @@ class OrderResource(Resource):
 
     def post(self):
         json_data = request.get_json(force=True)
-        order = Order(item=json_data['item'],quantity=json_data['quantity'])
+        order = Order(name=json_data['name'],
+                        item=json_data['item'],
+                        quantity=json_data['quantity'])
         Db.orders.append(order)
         response = json.loads(json.dumps(order.json_dump()))
         return {"status": "success", "data": response}, 201
@@ -23,7 +25,7 @@ class OrderResource(Resource):
         json_data = request.get_json(force=True)
         order = Db.orders[id]
         Db.orders.remove(order)
-        order = Order(item=json_data['item'],quantity=json_data['quantity'])
+        order = Order(name=json_data['name'],item=json_data['item'],quantity=json_data['quantity'])
         Db.orders.append(order)
         response = json.loads(json.dumps(order.json_dump()))
         return{"status": "success", "data": response}, 201
