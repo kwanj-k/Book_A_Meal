@@ -12,3 +12,5 @@ env.bak/
 venv.bak/
 .vscode
 .__init__.py
+*.pyc
+.coverage

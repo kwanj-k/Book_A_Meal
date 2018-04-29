@@ -1,6 +1,6 @@
 from flask import json, request,jsonify
 from flask_restful import Resource,reqparse,abort
-from models.models import Meal,Db
+from app.models import Meal,Db
 
 class MealResource(Resource):
     """

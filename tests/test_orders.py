@@ -10,10 +10,12 @@ class TestOrders(unittest.TestCase):
         app.testing = True
         self.app = app.test_client()
         self.data = {
+                        "name":"lunch",
                         "item":"chicken",
                         "quantity":1
         				 }
         self.data1 = {
+                        "name":"lunch",
                         "item":"chicken",
                         "quantity":2
         				 }
@@ -42,4 +44,3 @@ class TestOrders(unittest.TestCase):
         
 if __name__ == '__main__':
     unittest.main()
-      
