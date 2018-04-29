@@ -14,8 +14,7 @@ class MenuResource(Resource):
 
     def post(self):
         json_data = request.get_json(force=True)
-        menu = Menu(name=json_data['name'], item=json_data['item'])
+        menu = Menu(name=json_data['name'],item=json_data['item'])
         Db.menus.append(menu)
         response = json.loads(json.dumps(menu.json_dump()))
         return {"status": "success", "data": response}, 201
-
