@@ -49,6 +49,7 @@ FireUp PostMan and test the different endpoints from table below.
 Ensure the URLs are prefixed with ``` /api/v1 ```
 
 
+<<<<<<< HEAD
 | EndPoint                       | Functionality                           | 
 | -------------------------------|:---------------------------------------:|
 | POST     /auth/signup          | Register a user                         | 
@@ -77,4 +78,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to every Andela LearningFacilitator and bootcamper for the aid. 
+* Hat tip to every Andela LearningFacilitator and bootcamper for the aid.
+#### Contribution
+Fork the repo, create a PR to this repository's develop.
