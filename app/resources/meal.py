@@ -14,6 +14,7 @@ class MealResource(Resource):
 
     def post(self):
         json_data = request.get_json(force=True)
+        
         meal = Meal(name=json_data['name'])
         Db.meals.append(meal)
         response = json.loads(json.dumps(meal.json_dump()))
@@ -21,16 +22,20 @@ class MealResource(Resource):
 
     def put(self, id):
         json_data = request.get_json(force=True)
-        meal = Db.meals[id]
-        Db.meals.remove(meal)
-        meal.name = json_data['name']
-        Db.meals.append(meal)
-        response = json.loads(json.dumps(meal.json_dump()))
-        return{"status": "success", "data": response}, 200
+        if id <= len(Db.meals):
+            meal = Db.meals[id]
+            Db.meals.remove(meal)
+            meal.name = json_data['name']
+            Db.meals.append(meal)
+            response = json.loads(json.dumps(meal.json_dump()))
+            return{"status": "success", "data": response}, 200
+        return {"message":"Meal id does not exist"}
 
     def delete(self, id):
         json_data = request.get_json(force=True)
-        meal = Db.meals[id]
-        Db.meals.remove(meal)
-        response = json.loads(json.dumps(json_data))
-        return {"status": "deleted", "data": response}, 200
+        if id <= len(Db.meals):
+            meal = Db.meals[id]
+            Db.meals.remove(meal)
+            response = json.loads(json.dumps(json_data))
+            return {"status": "deleted", "data": response}, 200
+        return {"message":"Meal id does not exist"}

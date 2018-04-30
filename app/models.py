@@ -26,7 +26,9 @@ class Order(Menu):
     count = 1
     def __init__(self,name,item, quantity=1):
         Menu.__init__(self,name,item)
+        self.id = Order.count
         self.quantity   = quantity
+        self.id    = Order.count
         Order.count += 1
     def json_dump(self):
         return dict(

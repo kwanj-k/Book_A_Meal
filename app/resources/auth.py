@@ -9,7 +9,7 @@ class LoginResource(Resource):
         user = Db.get_user(email=json_data['email'],password=json_data['password'])
         if user:
             return {"status": "success"}, 200
-        return "Account not registered, sign up"
+        return "Account not registered,please sign up"
 class RegisterResource(Resource):
     def post(self):
         json_data = request.get_json(force=True)
