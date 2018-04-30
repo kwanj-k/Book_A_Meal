@@ -10,6 +10,7 @@ def create_app(config_name):
     app = Flask(__name__)
     api = Api(app)
     app.config.from_object(app_config[config_name])
+    app.url_map.strict_slashes = False
     
 
     api.add_resource(MealResource, '/api/v1/meals', '/api/v1/meals/<int:id>')
