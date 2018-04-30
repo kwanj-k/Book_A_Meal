@@ -48,17 +48,17 @@ Ensure the URLs are prefixed with ``` /api/v1 ```
 
 | EndPoint                       | Functionality                           | 
 | -------------------------------|:---------------------------------------:|
-| POST /auth/signup              | Register a user                         | 
-| POST /auth/login               | Login a user                            |
-| GET /meals/                    | Get all the meal options                |
-| POST /meals/                   | Add a meal option                       | 
-| PUT /meals/<mealId>            | Update the information of a meal option |
-| DELETE /meals/<mealId>         | Remove a meal option                    |
-| POST  /menu/                   | Setup the menu for the day              | 
-| GET /menu/                     | Get the menu for the day                |
-| POST  /orders                  | Select the meal and menu item           |
-| PUT /orders/orderId            | Modify an order                         | 
-| GET  /orders                   | Get all the orders                      |
+| POST     /auth/signup          | Register a user                         | 
+| POST     /auth/login           | Login a user                            |
+| GET      /meals/               | Get all the meal options                |
+| POST     /meals/               | Add a meal option                       | 
+| PUT      /meals/<mealId>       | Update the information of a meal option |
+| DELETE   /meals/<mealId>       | Remove a meal option                    |
+| POST     /menu/                | Setup the menu for the day              | 
+| GET      /menu/                | Get the menu for the day                |
+| POST     /orders               | Select the meal and menu item           |
+| PUT      /orders/orderId       | Modify an order                         | 
+| GET      /orders               | Get all the orders                      |
 
 
 
