@@ -1,19 +1,11 @@
 ### Book_A_Meal_The_App
 [![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=develop)](https://travis-ci.org/kwanj-k/Book_A_Meal)
 
-[![Coverage Status](https://coveralls.io/repos/github/kwanj-k/Book_A_Meal/badge.svg?branch=develop)](https://coveralls.io/github/kwanj-k/Book_A_Meal?branch=develop)
-### My Github repo
-
-```https://github.com/kwanj-k```
-
-#### Description
 This is an Application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
 
 This repo contains a UI and a Flask API for the book_a_meal app.
-
 The application is managed using PivotalTracker board, [click here](https://www.pivotaltracker.com/n/projects/2165483) to see.
-
-### Development
+### Getting Started 
 
 Clone the repository: 
 
@@ -21,7 +13,7 @@ Clone the repository:
 
 Navigate to the cloned repo. 
 
-Ensure you have the following:
+### Prerequisites
 
 ```
 1. python3 & a virtualenv
@@ -29,17 +21,24 @@ Ensure you have the following:
 3. Postman
 ```
 
+### Installing
 Create a virtualenv and activate it. [Refer here](https://docs.python.org/3/tutorial/venv.html)
-
-### Dependencies
 - Install the project dependencies:
 > $ pip install -r requirements.txt
 
-### Testing the API
+### Running Tests
 
 After setting up the above. Run:
 
-```python run.py```
+``` nosetests -v ``` To make sure all the tests are running and passing.
+
+### Breakdown into end to end tests
+The nosetests tests the different functionality of the API endpoints and makes sure they all working.
+
+### Deployment
+After setting up the above and making sure all the tests are passing. Run:
+
+``` python run.py ```
 
 Test the endpoints registered on `app/__init__.py` on Postman/curl on the port the app is running on. 
 
@@ -56,6 +55,7 @@ The API endpoints are:
 
 ```
 
+### Built With
 
 # Book_A_Meal_UI
 This is the user interface made simply with HTML and CSS and hosted on github pages.
@@ -76,13 +76,6 @@ To see the static site [click here](https://kwanj-k.github.io/Book_A_Meal/)
 
 ![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/gh-pages/UI/images/b-a-m.jpg)
 
-<!-- >An image of the SignUp Page on a tablet.
-
-![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/master/UI/images/signup.png)
-
->An image of the detailed orders Page.
-
-![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/mater/UI/images/detail.png) -->
 
 #### Contribution
 Fork the repo, create a PR to this repository's develop.

@@ -11,7 +11,7 @@ class Meal:
 
 class Menu(Meal):
     count = 1
-    def __init__(self,name, item):
+    def __init__(self, name, item):
         Meal.__init__(self,name)
         self.id     = Menu.count
         self.item   = item
