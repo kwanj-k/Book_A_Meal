@@ -17,6 +17,7 @@ class RegisterResource(Resource):
         # password  = json_data['password']
         # user_type = json_data['user_type']
         account = Account(username=json_data['username'],
+
                     email=json_data['email'],
                     password=json_data['password'],
                     user_type=json_data['user_type'])

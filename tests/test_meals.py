@@ -4,49 +4,44 @@ import json
 
 config_name = "testing"
 app = create_app(config_name)
-
 class TestMeal(unittest.TestCase):
-
+    """
+    Meal test class to test creation,listing and meal deletion.
+    """
     def setUp(self):
         app.testing = True
         self.app = app.test_client()
-        self.data = {
-                        "name":"lunch"
-        				 }
-        self.data1 = {
-                        "name":"lunchhh"
-        				 }
-       
+        self.data = {"name": "lunch"}
+        self.data1 = {"name": "breakfast"}
+
+    def test_meal_deletion(self):
+        data2 = {"name":"kwanj"}
+        r = self.app.post('/api/v1/meals',
+            data=json.dumps(data2),
+            content_type='application/json')
+        self.assertEqual(r.status_code, 201)
+        res = self.app.delete('/api/v1/meals/1')
+        self.assertEqual(res.status_code, 200)
+
     def test_create_meals(self):
-        #Tests create method then tests get method.
         response = self.app.post('/api/v1/meals',
-                     data = json.dumps(self.data) ,
-                      content_type = 'application/json')
+                                 data=json.dumps(self.data),
+                                 content_type='application/json')
         self.assertEqual(response.status_code, 201)
-        
     def test_get_meals(self):
         res = self.app.get('/api/v1/meals')
         self.assertEqual(res.status_code, 200)
-
     def test_meal_update(self):
-        #Tests meal update
         response = self.app.post('/api/v1/meals',
-                     data = json.dumps(self.data) ,
-                      content_type = 'application/json')
+                                 data=json.dumps(self.data),
+                                 content_type='application/json')
         self.assertEqual(response.status_code, 201)
         res = self.app.put(
-                                '/api/v1/meals/0',
-                                data=json.dumps(self.data1) ,
-                                content_type= 'application/json')
+            '/api/v1/meals/1',
+            data=json.dumps(self.data1),
+            content_type='application/json')
         self.assertEqual(res.status_code, 200)
-    #works on postman
-    # def test_meal_deletion(self):
-    #     #Tests meal deletion 
-    #     self.app.post('/api/v1/meals',
-    #                  data = json.dumps(self.data1)) 
-    #     res = self.app.delete('/api/v1/meals/0')
-    #     self.assertEqual(res.status_code, 200)
-        
+    
 
 if __name__ == '__main__':
     unittest.main()

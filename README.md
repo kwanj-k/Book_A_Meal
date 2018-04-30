@@ -1,17 +1,11 @@
-### Book_A_Meal_The_App
+
+### Book_A_Meal
 [![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=develop)](https://travis-ci.org/kwanj-k/Book_A_Meal)
 
 This is an Application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
 
 This repo contains a UI and a Flask API for the book_a_meal app.
 The application is managed using PivotalTracker board, [click here](https://www.pivotaltracker.com/n/projects/2165483) to see.
-### Getting Started 
-
-Clone the repository: 
-
-```git clone https://github.com/kwanj-k/Book_A_Meal.git```
-
-Navigate to the cloned repo. 
 
 ### Prerequisites
 
@@ -21,28 +15,35 @@ Navigate to the cloned repo.
 3. Postman
 ```
 
+
+### Getting Started 
+
+Clone the repository: 
+
+```git clone https://github.com/kwanj-k/Book_A_Meal.git```
+
+Navigate to the cloned repo.
+
 ### Installing
-Create a virtualenv and activate it. [Refer here](https://docs.python.org/3/tutorial/venv.html)
+
+Create a virtualenv and activate it in the cloned repo. [Refer here](https://docs.python.org/3/tutorial/venv.html)
 - Install the project dependencies:
 > $ pip install -r requirements.txt
 
+
 ### Running Tests
 
-After setting up the above. Run:
+- On the terminal with the enviroment activated,run the following commands inorder they appear:
+> $ export FLASK_APP="app.py
+> $ export APP_SETTINGS="development"
+> $ nosetests --with-coverage --cover-package app 
 
-``` nosetests -v ``` To make sure all the tests are running and passing.
+### Testing API EndPoints
 
-### Breakdown into end to end tests
-The nosetests tests the different functionality of the API endpoints and makes sure they all working.
+- After running the tests above and ensuring they all pass.Run:
+> $ python run.py
 
-### Deployment
-After setting up the above and making sure all the tests are passing. Run:
-
-``` python run.py ```
-
-Test the endpoints registered on `app/__init__.py` on Postman/curl on the port the app is running on. 
-
-### API EndPoints
+These will start the development server.Use Postman to test the different endpoints.
 Ensure the URLs are prefixed with ``` /api/v1 ```
 
 
@@ -59,28 +60,21 @@ Ensure the URLs are prefixed with ``` /api/v1 ```
 | POST     /orders               | Select the meal and menu item           |
 | PUT      /orders/orderId       | Modify an order                         | 
 | GET      /orders               | Get all the orders                      |
+  
 
 
 
-# Book_A_Meal_UI
-This is the user interface made simply with HTML and CSS and hosted on github pages.
-
-It is made up of different static pages to showcase the different funtionalities book_a_meal app offers. 
-
-### Testing the UI
-After setting up as described up above on the development section. OPen:
-
-```index.html``` with chrome or any other browser.
-
-View the different pages as displayed on the navigation.
-
-### GitHubPages
-To see the static site [click here](https://kwanj-k.github.io/Book_A_Meal/)
-
->An image of the Landing Page.
-
-![alt text](https://raw.githubusercontent.com/kwanj-k/Book_A_Meal/gh-pages/UI/images/b-a-m.jpg)
 
 
-#### Contribution
-Fork the repo, create a PR to this repository's develop.
+## Authors
+
+* **Kelvin Mwangi** - *Initial work* - [kwanj-k](https://github.com/kwanj-k)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to every Andela bootcamper and facilitators for the help with the project.
+
