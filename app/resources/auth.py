@@ -17,6 +17,7 @@ class RegisterResource(Resource):
         # password  = json_data['password']
         # user_type = json_data['user_type']
         account = Account(username=json_data['username'],
+
                     email=json_data['email'],
                     password=json_data['password'],
                     user_type=json_data['user_type'])
@@ -28,4 +29,4 @@ class RegisterResource(Resource):
             #         if user_type == 1 or user_type == 2:
         Db.user_accounts.append(account)
         res = "Your account is now registered please proceed to login" 
-        return {"status": "success", "data": res}, 201 
+        return {"status": "success", "data": res}, 201   
