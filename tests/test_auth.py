@@ -1,7 +1,6 @@
 from app import create_app
 import unittest
 import json
-
 config_name = "testing"
 app = create_app(config_name)
 class TestAuthenitication(unittest.TestCase):
@@ -21,7 +20,7 @@ class TestAuthenitication(unittest.TestCase):
                       "user_type": 2}
         self.data1 = {
             "email": "email@gmail.com",
-            "password": "4084",}
+            "password": "4084",}  
     def test_register(self):
         res = self.app.post("/api/v1/auth/register",
                             data=json.dumps(self.data),
@@ -39,6 +38,7 @@ class TestAuthenitication(unittest.TestCase):
                             data=json.dumps(user),
                             content_type='application/json')
         self.assertEqual(res.status_code, 200)
+                  
 
     def test_double_registration(self):
         res = self.app.post("/api/v1/auth/register",
@@ -49,4 +49,3 @@ class TestAuthenitication(unittest.TestCase):
                             data=json.dumps(self.data2),
                             content_type='application/json')
         self.assertEqual(res.status_code, 409)
-
