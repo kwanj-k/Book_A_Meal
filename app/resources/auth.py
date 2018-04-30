@@ -28,4 +28,4 @@ class RegisterResource(Resource):
             #         if user_type == 1 or user_type == 2:
         Db.user_accounts.append(account)
         res = "Your account is now registered please proceed to login" 
-        return {"status": "success", "data": res}, 201   
+        return {"status": "success", "data": res}, 201 
