@@ -4,7 +4,6 @@ import json
 config_name = "testing"
 app = create_app(config_name)
 
-
 class TestMenu(unittest.TestCase):
     """
     Menu test class to test menu creation and get menu.
@@ -24,3 +23,4 @@ class TestMenu(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 if __name__ == '__main__':
     unittest.main()
+

@@ -4,8 +4,6 @@ import json
 
 config_name = "testing"
 app = create_app(config_name)
-
-
 class TestOrders(unittest.TestCase):
     """
     Order test class to test post,get and update methods.
@@ -39,3 +37,4 @@ class TestOrders(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 if __name__ == '__main__':
     unittest.main()
+

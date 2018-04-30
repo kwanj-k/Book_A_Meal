@@ -7,7 +7,6 @@ class MenuResource(Resource):
     """
     A Menu Resource with GET and POST methods
     """
-
     def get(self):
         menus = Db.menus
         response = [menu.json_dump() for menu in menus]

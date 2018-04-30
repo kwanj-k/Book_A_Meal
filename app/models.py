@@ -9,12 +9,10 @@ class Meal:
         self.name = name
         self.id = Meal.count
         Meal.count += 1
-
     def json_dump(self):
         return dict(
             name=self.name,
             id=self.id)
-
 
 class Menu(Meal):
     """
@@ -28,13 +26,11 @@ class Menu(Meal):
         self.id = Menu.count
         self.item = item
         Menu.count += 1
-
     def json_dump(self):
         return dict(
             name=self.name,
             item=self.item,
-            id=self.id)
-
+            id = self.id)
 
 class Order(Menu):
     """
@@ -66,7 +62,7 @@ class Db(object):
     meals = []
     menus = []
     orders = []
-    user_accounts = []
+    user_accounts = [
 
     @classmethod
     def get_user(cls, email, password):
@@ -75,7 +71,7 @@ class Db(object):
                 return user
 
     @classmethod
-    def get_meal_by_id(cls, id):
+    def get_meal_by_id(cls,id)
         for meal in cls.meals:
             if meal.id == id:
                 return meal
@@ -90,8 +86,7 @@ class Db(object):
     def get_user_info(cls, username, email):
         for user in cls.user_accounts:
             if user.email == email and user.username == username:
-                return user
-
+                return us
 
 class Account:
     """
@@ -113,3 +108,4 @@ class Account:
             return 'customer'
         elif num == 2:
             return 'caterer'
+

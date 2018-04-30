@@ -38,7 +38,6 @@ class OrderResource(Resource):
             response = json.loads(json.dumps(order.json_dump()))
             return{"status": "success", "data": response}, 200
         return {"message": "Order id does not exist"}
-
     def delete(self, id):
         json_data = request.get_json(force=True)
         order = Db.get_order_by_id(id)
@@ -47,3 +46,4 @@ class OrderResource(Resource):
             response = json.loads(json.dumps(json_data))
             return {"status": "deleted", "data": response}, 200
         return {"message": "Order id does not exist"}
+

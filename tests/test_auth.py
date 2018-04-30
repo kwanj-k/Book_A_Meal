@@ -4,8 +4,6 @@ import json
 
 config_name = "testing"
 app = create_app(config_name)
-
-
 class TestAuthenitication(unittest.TestCase):
     """
     Authenitication class to test registration,login and double registration.
@@ -51,3 +49,4 @@ class TestAuthenitication(unittest.TestCase):
                             data=json.dumps(self.data2),
                             content_type='application/json')
         self.assertEqual(res.status_code, 409)
+
