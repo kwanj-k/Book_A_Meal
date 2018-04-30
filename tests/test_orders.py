@@ -40,7 +40,7 @@ class TestOrders(unittest.TestCase):
         response = self.app.put('/api/v1/orders/0',
                      data = json.dumps(self.data1) ,
                       content_type = 'application/json')
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
         
 if __name__ == '__main__':
     unittest.main()
