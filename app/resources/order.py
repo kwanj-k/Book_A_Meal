@@ -22,19 +22,25 @@ class OrderResource(Resource):
 
     def put(self, id):
         json_data = request.get_json(force=True)
-        if id <= len(Db.orders):
-            order = Db.orders[id]
-            Db.orders.remove(order)
-            order = Order(name=json_data['name'],item=json_data['item'],quantity=json_data['quantity'])
-            Db.orders.append(order)
+        order = Db.get_order_by_id(id)
+        name = json_data['name']
+        item = json_data['item']
+        quantity = json_data['quantity']
+        if order:
+            if name:
+                order.name = name
+            if item:
+                order.item = item
+            if quantity:
+                order.quantity = quantity
             response = json.loads(json.dumps(order.json_dump()))
-            return{"status": "success", "data": response}, 201
-        return {"message": "Order id does not exst"}
+            return{"status": "success", "data": response}, 200
+        return {"message":"Order id does not exist"}
 
     def delete(self, id):
         json_data = request.get_json(force=True)
-        if id <= len(Db.orders):
-            order = Db.orders[id]
+        order = Db.get_order_by_id(id)
+        if order:
             Db.orders.remove(order)
             response = json.loads(json.dumps(json_data))
             return {"status": "deleted", "data": response}, 200
