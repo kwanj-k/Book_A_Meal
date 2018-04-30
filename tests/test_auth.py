@@ -34,5 +34,3 @@ class TestAuthenitication(unittest.TestCase):
                     data=json.dumps(self.data1),
                              content_type='application/json')
         self.assertEqual(res.status_code, 200)
-
-    	

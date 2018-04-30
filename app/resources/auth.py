@@ -10,8 +10,6 @@ class LoginResource(Resource):
         if user:
             return {"status": "success"}, 200
         return "Account not registered, sign up"
-
-
 class RegisterResource(Resource):
     def post(self):
         json_data = request.get_json(force=True)
@@ -24,7 +22,4 @@ class RegisterResource(Resource):
         else:
             Db.caterer_accounts.append(account)
         res = "Your account is now registered please proceed to login" 
-        return {"status": "success", "data": res}, 201  
-        
-
-        
+        return {"status": "success", "data": res}, 201   

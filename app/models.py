@@ -49,7 +49,6 @@ class Db(object):
             if user.email == email and user.password == password:
                 return user
 
-    
 class Account:
     count = 1
     def __init__(self,username,email,password,user_type=1):
