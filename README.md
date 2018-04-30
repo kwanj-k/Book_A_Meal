@@ -42,7 +42,16 @@ After setting up the above and making sure all the tests are passing. Run:
 
 Test the endpoints registered on `app/__init__.py` on Postman/curl on the port the app is running on. 
 
-The API endpoints are:
+### API EndPoints
+Ensure the URLs are prefixed with ``` /api/v1 ```
+
+
+| EndPoint                       | Functionality             | 
+| -------------------------------|:-------------------------:|
+| POST /auth/signup              | Register a user           | 
+| POST /auth/login               | Login a user              |
+| GET /meals/                    | Get all the meal options  |
+
 ```
 1.'/api/v1/meals'         {create and get meals}
 2.'/api/v1/meals/id'      {delete meal by id and a update meal}

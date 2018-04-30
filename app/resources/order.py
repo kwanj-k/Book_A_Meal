@@ -6,7 +6,6 @@ class OrderResource(Resource):
     """
     Create a Order Resource with GET, POST, PUT and DELETE methods
     """
-    
     def get(self):
         orders = Db.orders
         response = [order.json_dump() for order in orders]
