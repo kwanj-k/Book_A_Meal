@@ -4,6 +4,7 @@ class Meal:
         self.name   = name
         self.id     = Meal.count
         Meal.count += 1
+   
     def json_dump(self):
         return dict(
             name=self.name,
@@ -26,7 +27,9 @@ class Order(Menu):
     count = 1
     def __init__(self,name,item, quantity=1):
         Menu.__init__(self,name,item)
+        self.id = Order.count
         self.quantity   = quantity
+        self.id    = Order.count
         Order.count += 1
     def json_dump(self):
         return dict(
@@ -41,12 +44,28 @@ class Db(object):
     menus            = []
     orders           = []
     user_accounts    = []
-    caterer_accounts = []
 
     @classmethod
     def get_user(cls, email, password):
-        for user in cls.user_accounts or cls.caterer_accounts:
+        for user in cls.user_accounts:
             if user.email == email and user.password == password:
+                return user
+
+    @classmethod
+    def get_meal_by_id(cls,id):
+        for meal in cls.meals:
+            if meal.id == id:
+                return meal
+
+    @classmethod
+    def get_order_by_id(cls,id):
+        for order in cls.orders:
+            if order.id == id:
+                return order
+    @classmethod
+    def get_user_info(cls, username, email):
+        for user in cls.user_accounts:
+            if user.email == email and user.username == username:
                 return user
 
 class Account:
