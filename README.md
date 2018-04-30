@@ -3,8 +3,9 @@
 
 This is an Application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
 
-This repo contains a UI and a Flask API for the book_a_meal app.
 The application is managed using PivotalTracker board, [click here](https://www.pivotaltracker.com/n/projects/2165483) to see.
+
+To see the API docs [click here](https://app.apiary.io/bookameal6/)
 ### Getting Started 
 
 Clone the repository: 
@@ -39,13 +40,13 @@ After setting up the above. Run:
 
 ``` nosetests --with-coverage --cover-package app```
 
--This should run all the tests and give test coverage.  
+This should run all the tests and give test coverage.  
 
 ### Testing API EndPoints
-- Start the development server first.Run:
+Start the development server with:
 > $ python run.py
 
-FireUp PostMan and test the different endpoints from table below. 
+FireUp PostMan and test the different API endpoints from the table below. 
 
 Ensure the URLs are prefixed with ``` /api/v1 ```
 
