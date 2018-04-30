@@ -30,6 +30,7 @@ Create a virtualenv and activate it. [Refer here](https://docs.python.org/3/tuto
 > $ pip install -r requirements.txt
 - On your terminal with the env still activated.Run:
 > $ export FLASK_APP="run.py"
+
 > $ export APP_SETTINGS="development"
 
 ### Running Tests
@@ -49,7 +50,6 @@ FireUp PostMan and test the different endpoints from table below.
 Ensure the URLs are prefixed with ``` /api/v1 ```
 
 
-<<<<<<< HEAD
 | EndPoint                       | Functionality                           | 
 | -------------------------------|:---------------------------------------:|
 | POST     /auth/signup          | Register a user                         | 
