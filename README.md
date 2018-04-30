@@ -46,25 +46,21 @@ Test the endpoints registered on `app/__init__.py` on Postman/curl on the port t
 Ensure the URLs are prefixed with ``` /api/v1 ```
 
 
-| EndPoint                       | Functionality             | 
-| -------------------------------|:-------------------------:|
-| POST /auth/signup              | Register a user           | 
-| POST /auth/login               | Login a user              |
-| GET /meals/                    | Get all the meal options  |
+| EndPoint                       | Functionality                           | 
+| -------------------------------|:---------------------------------------:|
+| POST /auth/signup              | Register a user                         | 
+| POST /auth/login               | Login a user                            |
+| GET /meals/                    | Get all the meal options                |
+| POST /meals/                   | Add a meal option                       | 
+| PUT /meals/<mealId>            | Update the information of a meal option |
+| DELETE /meals/<mealId>         | Remove a meal option                    |
+| POST  /menu/                   | Setup the menu for the day              | 
+| GET /menu/                     | Get the menu for the day                |
+| POST  /orders                  | Select the meal and menu item           |
+| PUT /orders/orderId            | Modify an order                         | 
+| GET  /orders                   | Get all the orders                      |
 
-```
-1.'/api/v1/meals'         {create and get meals}
-2.'/api/v1/meals/id'      {delete meal by id and a update meal}
-3.'/api/v1/menus'         {create a menu item and get menus}
-4.'/api/v1/orders'        {get orders and create orders}
-5.'/api/v1/orders/id'     {delete order and update order by id}
-6.'/api/v1/auth/register' {register a user}
-7.'/api/v1/auth/login'    {User login}
 
-
-```
-
-### Built With
 
 # Book_A_Meal_UI
 This is the user interface made simply with HTML and CSS and hosted on github pages.
