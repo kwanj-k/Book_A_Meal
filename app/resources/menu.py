@@ -1,21 +1,36 @@
-from flask import json, request, jsonify
+from flask import json, request
 from flask_restful import Resource
-from app.models import Menu, Db
+from app.models import db, Menu
 
 
 class MenuResource(Resource):
     """
-     Menu Resource with GET, POST, PUT and DELETE methods
+    Menu Resource with GET, POST, PUT and DELETE methods
     """
 
     def get(self):
-        menus = Db.menus
+        menus = Menu.query.all()
         response = [menu.json_dump() for menu in menus]
         return {"status": "success", "data": response}, 200
 
     def post(self):
         json_data = request.get_json(force=True)
-        menu = Menu(name=json_data['name'], item=json_data['item'])
-        Db.menus.append(menu)
+        menu = Menu(item=json_data['item'], meal_name=json_data['meal_name'])
+        menu.save()
         response = json.loads(json.dumps(menu.json_dump()))
         return {"status": "success", "data": response}, 201
+
+    def put(self, id):
+        json_data = request.get_json(force=True)
+        menu = Menu.query.filter_by(id=id).first()
+        menu.item = json_data['item']
+        db.session.commit()
+        response = menu.json_dump()
+        return{"status": "success", "data": response}, 200
+
+    def delete(self, id):
+        json_data = request.get_json(force=True)
+        Menu.query.filter_by(id=id).delete()
+        db.session.commit()
+        response = json.loads(json.dumps(json_data))
+        return {"status": "deleted", "data": response}, 200

@@ -1,110 +1,107 @@
-class Meal:
-    """
-    A Meal class to mode the meal entity and provides a json_dump method.
-    """
-    count = 1
+from flask_sqlalchemy import SQLAlchemy
 
-    def __init__(self, name):
-        self.name = name
-        self.id = Meal.count
-        Meal.count += 1
+db = SQLAlchemy()
 
-    def json_dump(self):
-        return dict(
-            name=self.name,
-            id=self.id)
+from flask_bcrypt import Bcrypt
 
+class User(db.Model):
+    """This class defines the users table """
 
-class Menu(Meal):
-    """
-    A Menu class to model the menu entity and provides a json_dump method.
-    """
-    count = 1
+    __tablename__ = 'users'
 
-    def __init__(self, name, item):
-        Meal.__init__(self, name)
-        self.id = Menu.count
-        self.item = item
-        Menu.count += 1
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(256), nullable=False, unique=True)
+    password = db.Column(db.String(256), nullable=False)
 
-    def json_dump(self):
-        return dict(
-            name=self.name,
-            item=self.item,
-            id=self.id)
-
-
-class Order(Menu):
-    """
-    A Order class to model the order entity and provides a json_dump method.
-    """
-    count = 1
-
-    def __init__(self, name, item, quantity=1):
-        Menu.__init__(self, name, item)
-        self.id = Order.count
-        self.quantity = quantity
-        self.id = Order.count
-        Order.count += 1
-
-    def json_dump(self):
-        return dict(
-            name=self.name,
-            item=self.item,
-            quantity=self.quantity,
-            id=self.id)
-
-
-class Db(object):
-    """
-    A mock-db class to simulate a a database.
-    """
-    meals = []
-    menus = []
-    orders = []
-    user_accounts = []
-
-    @classmethod
-    def get_user(cls, email, password):
-        for user in cls.user_accounts:
-            if user.email == email and user.password == password:
-                return user
-
-    @classmethod
-    def get_meal_by_id(cls, id):
-        for meal in cls.meals:
-            if meal.id == id:
-                return meal
-
-    @classmethod
-    def get_order_by_id(cls, id):
-        for order in cls.orders:
-            if order.id == id:
-                return order
-
-    @classmethod
-    def get_user_info(cls, username, email):
-        for user in cls.user_accounts:
-            if user.email == email and user.username == username:
-                return user
-
-
-class Account:
-    """
-    An Acouunt class to model the user entity and provides get_user_type method.
-    """
-    count = 1
-
-    def __init__(self, username, email, password, user_type=1):
-        self.id = Account.count
-        self.username = username
+    def __init__(self, email,orders, password):
+        """Initialize the user with an email,orders and a password."""
         self.email = email
-        self.password = password
-        self.user_type = user_type
-        Account.count += 1
+        self.orders= orders
+        self.password = Bcrypt().generate_password_hash(password).decode()
 
-    def get_user_type(self, num):
-        if num == 1:
-            return 'customer'
-        elif num == 2:
-            return 'caterer'
+    def password_is_valid(self, password):
+        """
+        Checks the password against it's hash to validates the user's password
+        """
+        return Bcrypt().check_password_hash(self.password, password)
+
+    def save(self):
+        """Save a user to the database.
+        This includes creating a new user and editing one.
+        """
+        db.session.add(self)
+        db.session.commit()
+
+    def json_dump(self):
+        return dict(
+            email=self.email
+        )
+class Meal(db.Model):
+
+    __tablename__ = 'meals'
+    id   = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    date_created = db.Column(
+        db.TIMESTAMP, server_default=db.func.current_timestamp(),
+        nullable=False)
+
+    def __init__(self, name,menus):
+        """ Initialize with name of meal """
+        self.name = name
+
+    def json_dump(self):
+        return dict(
+            name=self.name,
+            date_created=str(self.date_created)
+        )
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+class Menu(db.Model):
+    __tablename__ = 'menus'
+    id = db.Column(db.Integer, primary_key=True)
+    item = db.Column(db.String(100), nullable=False)
+    date_created = db.Column(
+        db.TIMESTAMP, server_default=db.func.current_timestamp(),
+        nullable=False)
+    # meal_id = db.Column(db.Integer, db.ForeignKey(
+    #     'meals.id', ondelete='CASCADE'), nullable=False)
+    # meal = db.relationship('Meal', backref=db.backref('menus',
+    #                                                   lazy='dynamic'))
+
+    def __init__(self, item,meal_id):
+        self.item = item
+        self.meal_id = meal_id
+
+    def json_dump(self):
+        return dict(
+            item=self.item,
+            date_created=str(self.date_created))
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+class Order(db.Model):
+    __tablename__ = 'orders'
+    id = db.Column(db.Integer, primary_key=True)
+    quantity = db.Column(db.Integer, default=1)
+    date_created = db.Column(
+        db.TIMESTAMP, server_default=db.func.current_timestamp(),
+        nullable=False)
+
+    def __init__(self,quantity):
+        self.quantity = quantity
+
+    def json_dump(self):
+        return dict(
+            quantity = self.quantity,
+            date_created=str(self.date_created))
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    
