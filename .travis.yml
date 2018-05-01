@@ -3,22 +3,11 @@ python:
   - 3.5.2
 install:
   - pip install -r requirements.txt
-<<<<<<< HEAD
 
 env:
   - FLASK_VERSION=0.12.2
-
-=======
-<<<<<<< HEAD
-env:
-  - FLASK_VERSION=0.12.2
->>>>>>> b20719320a1c64143bda6461586488fd0da007d3
 script: 
   - nosetests --with-coverage --cover-package app
 
 after_success:
-<<<<<<< HEAD
   - coveralls
-=======
-  - coveralls
->>>>>>> b20719320a1c64143bda6461586488fd0da007d3
