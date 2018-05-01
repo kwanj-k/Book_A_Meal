@@ -8,6 +8,5 @@ env:
   - FLASK_VERSION=0.12.2
 script: 
   - nosetests --with-coverage --cover-package app
-
 after_success:
   - coveralls
