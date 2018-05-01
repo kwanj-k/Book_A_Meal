@@ -4,7 +4,9 @@ import json
 config_name = "testing"
 app = create_app(config_name)
 class TestMenu(unittest.TestCase):
-
+    """
+    Menu Test class to test create and get endpoints.
+    """
     def setUp(self):
         app.testing = True
         self.app = app.test_client()
