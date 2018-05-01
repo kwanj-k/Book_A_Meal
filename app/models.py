@@ -1,4 +1,7 @@
 class Meal:
+    """
+    A Meal class to mode the meal entity and provides a json_dump method.
+    """
     count = 1
 
     def __init__(self, name):
@@ -13,6 +16,9 @@ class Meal:
 
 
 class Menu(Meal):
+    """
+    A Menu class to model the menu entity and provides a json_dump method.
+    """
     count = 1
 
     def __init__(self, name, item):
@@ -29,6 +35,9 @@ class Menu(Meal):
 
 
 class Order(Menu):
+    """
+    A Order class to model the order entity and provides a json_dump method.
+    """
     count = 1
 
     def __init__(self, name, item, quantity=1):
@@ -47,6 +56,9 @@ class Order(Menu):
 
 
 class Db(object):
+    """
+    A mock-db class to simulate a a database.
+    """
     meals = []
     menus = []
     orders = []
@@ -78,6 +90,9 @@ class Db(object):
 
 
 class Account:
+    """
+    An Acouunt class to model the user entity and provides get_user_type method.
+    """
     count = 1
 
     def __init__(self, username, email, password, user_type=1):

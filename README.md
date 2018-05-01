@@ -65,10 +65,6 @@ Ensure the URLs are prefixed with ``` /api/v1 ```
 | PUT      /orders/orderId       | Modify an order                         | 
 | GET      /orders               | Get all the orders                      |
 
-
-#### Contribution
-Fork the repo, create a PR to this repository's develop.
-
 ## Authors
 
 * **Kelvin Mwangi** - *Initial work* - [kwanj-k](https://github.com/kwanj-k)

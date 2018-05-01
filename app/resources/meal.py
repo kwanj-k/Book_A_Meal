@@ -5,7 +5,7 @@ from app.models import Meal, Db
 
 class MealResource(Resource):
     """
-    Create a Meal Resource with GET, POST, PUT and DELETE methods
+     Meal Resource with GET, POST, PUT and DELETE methods
     """
 
     def get(self):

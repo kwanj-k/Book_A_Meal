@@ -5,7 +5,7 @@ from app.models import Order, Db
 
 class OrderResource(Resource):
     """
-    Create a Order Resource with GET, POST, PUT and DELETE methods
+     Order Resource with GET, POST, PUT and DELETE methods
     """
 
     def get(self):

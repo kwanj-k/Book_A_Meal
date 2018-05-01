@@ -6,6 +6,9 @@ config_name = "testing"
 app = create_app(config_name)
 
 class TestAuthenitication(unittest.TestCase):
+    """
+    Authenitication class to test the login and registration endpoints.
+    """
 
     def setUp(self):
         app.testing = True

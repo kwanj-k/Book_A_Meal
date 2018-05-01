@@ -6,6 +6,9 @@ config_name = "testing"
 app = create_app(config_name)
 
 class TestOrders(unittest.TestCase):
+    """
+    Orders Test class to test create,get,update and delete endpoints.
+    """
     def setUp(self):
         app.testing = True
         self.app = app.test_client()
@@ -30,7 +33,6 @@ class TestOrders(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_Orders_update(self):
-        #Tests orders update
         self.app.post('/api/v1/orders',
                      data = json.dumps(self.data) ,
                       content_type = 'application/json')

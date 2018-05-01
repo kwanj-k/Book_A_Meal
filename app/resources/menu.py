@@ -5,7 +5,7 @@ from app.models import Menu, Db
 
 class MenuResource(Resource):
     """
-    Create a Menu Resource with GET, POST, PUT and DELETE methods
+     Menu Resource with GET, POST, PUT and DELETE methods
     """
 
     def get(self):

@@ -4,6 +4,9 @@ from app.models import Account, Db
 
 
 class LoginResource(Resource):
+    """
+    A login resource that provides post methods for login.
+    """
     def post(self):
         json_data = request.get_json(force=True)
 
@@ -15,6 +18,9 @@ class LoginResource(Resource):
 
 
 class RegisterResource(Resource):
+    """
+    A Registration resource with post method for user registration.
+    """
     def post(self):
         json_data = request.get_json(force=True)
         # username = json_data['username']
