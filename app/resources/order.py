@@ -15,7 +15,7 @@ class OrderResource(Resource):
 
     def post(self):
         json_data = request.get_json(force=True)
-        order = Order(menu_item=json_data['menu_item'],user=json_data['user'],
+        order = Order(item_id=json_data['item_id'],user_id=json_data['user_id'],
                         quantity=json_data['quantity'])
         order.save()
         response = json.loads(json.dumps(order.json_dump()))
@@ -24,7 +24,7 @@ class OrderResource(Resource):
     def put(self, id):
         json_data = request.get_json(force=True)
         order = Order.query.filter_by(id=id).first()
-        order.menu_item = json_data['menu_item']
+        order.item_id = json_data['item_id']
         order.quantity = json_data['quantity']
         db.session.commit()
         response = order.json_dump()

@@ -22,7 +22,7 @@ class LoginResource(Resource):
     def post(self):
         json_data = request.get_json(force=True)
         user = User.query.filter_by(email=json_data['email']).first()
-        if user and user.password_is_valid(request.json_data['password']):
+        if user and user.password_is_valid(json_data['password']):
             response = json.loads(json.dumps(user.json_dump()))
             return {"status": "success", "data": response}, 201
         return {"data":"Invalid login credentials."}

@@ -15,7 +15,7 @@ class MenuResource(Resource):
 
     def post(self):
         json_data = request.get_json(force=True)
-        menu = Menu(item=json_data['item'], meal_name=json_data['meal_name'])
+        menu = Menu(meal_id=json_data['meal_id'] ,item=json_data['item'])
         menu.save()
         response = json.loads(json.dumps(menu.json_dump()))
         return {"status": "success", "data": response}, 201
@@ -24,6 +24,7 @@ class MenuResource(Resource):
         json_data = request.get_json(force=True)
         menu = Menu.query.filter_by(id=id).first()
         menu.item = json_data['item']
+
         db.session.commit()
         response = menu.json_dump()
         return{"status": "success", "data": response}, 200
