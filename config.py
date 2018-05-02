@@ -3,6 +3,10 @@ import os
 class Config(object):
     """Parent configuration class."""
     DEBUG = False
+    CSRF_ENABLED = True
+    SECRET = os.getenv('SECRET')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DevDB_URL')
+
     
 
 class DevelopmentConfig(Config):
@@ -10,7 +14,9 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 class TestingConfig(Config):
+    """Configurations for Testing, with a separate test database."""
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = os.getenv('TestDB_URL')
     DEBUG = True
 
 class StagingConfig(Config):
