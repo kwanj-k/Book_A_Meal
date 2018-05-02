@@ -3,7 +3,7 @@ from flask_restful import reqparse, abort, Api, Resource
 from config import app_config
 from app.resources.meal import MealResource,MealListResource
 from app.resources.menu import MenuResource,MenuListResource
-from app.resources.order import OrderResource
+from app.resources.order import OrderResource,OrderListResource
 from app.resources.auth import RegisterResource, LoginResource
 
 
@@ -20,8 +20,8 @@ def create_app(config_name):
     api.add_resource(MealResource, '/api/v1/meals/<int:id>')
     api.add_resource(MenuListResource, '/api/v1/menus')
     api.add_resource(MenuResource, '/api/v1/menus/<int:id>')
-    api.add_resource(OrderResource, '/api/v1/orders',
-                      '/api/v1/orders/<int:id>')
+    api.add_resource(OrderListResource, '/api/v1/orders')
+    api.add_resource(OrderResource, '/api/v1/orders/<int:id>')
     api.add_resource(RegisterResource, '/api/v1/auth/register')
     api.add_resource(LoginResource, '/api/v1/auth/login')
 
