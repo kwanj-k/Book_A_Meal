@@ -5,10 +5,7 @@ from app.models import db, Meal
 parser = reqparse.RequestParser()
 parser.add_argument('meal_name')
 
-# def abort_if_meal_doesnt_exist(id):
-#         meals = Meal.query.all()
-#         if id not in [meal.id for meal in meals]:
-#             return{"data":"Meal id {} doesn't exist".format(id)},404
+
 class MealResource(Resource):
     """
     Meal Resource with GET, POST, PUT and DELETE methods
@@ -21,7 +18,8 @@ class MealResource(Resource):
         """
         meal = Meal.query.filter_by(id=id).first()
         if meal is None:
-            return {"status":"Failed!!","data":"Please enter a valid meal id"}
+            return {"status":"Failed!!",
+            "data":"Meal id does not exist.Please enter a valid meal id"}
         response = meal.json_dump()
         return response
 
@@ -33,7 +31,8 @@ class MealResource(Resource):
         meal_name = json_data['meal_name']
         meal = Meal.query.filter_by(id=id).first()
         if meal is None:
-            return {"status":"Failed!!","data":"Please enter a valid meal id"}
+            return {"status":"Failed!!",
+            "data":"Meal id does not exist.Please enter a valid meal id"}
         if meal_name == '':
             return {"status":"Failed!!",
             "data":"Meal name can not be empty.Please enter a valid meal name"}
@@ -50,9 +49,10 @@ class MealResource(Resource):
         json_data = request.get_json(force=True)
         meal= Meal.query.filter_by(id=id).first()
         if  meal is None:
-            return {"status":"Failed!!","data":"Please enter a valid meal id"}
+            return {"status":"Failed!!",
+            "data":"Meal id does not exist.Please enter a valid meal id"}
         else:
-            meal.delete()
+            Meal.query.filter_by(id=id).delete()
             db.session.commit()
             response = json.loads(json.dumps(json_data))
             return {"status": "deleted!", "data": response}, 200
