@@ -30,7 +30,8 @@ class MenuResource(Resource):
         """
         json_data = request.get_json(force=True)
         menu = Menu.query.filter_by(id=id).first()
-        """tod handle when user inputs empty meal_id"""
+        if 'meal_id' or 'menu_item' not in json_data:
+            return {"status":"Failed!","data":"Please provide a meal_id and menu_item to update."}
         if  menu is None:
             return {"status":"Failed!!",
             "data":"Menu id does not exist.Please enter a valid meal id"}
@@ -90,6 +91,9 @@ class MenuListResource(Resource):
         menu_item = json_data['menu_item']
         meal_id   = json_data['meal_id']
         meal= Meal.query.filter_by(id=meal_id).first()
+        if 'meal_id' or 'menu_item' not in json_data:
+            return {"status":"Failed!",
+                    "data":"Please provide a meal_id and menu_item to update."}
         if menu_item == '':
             return {"status":"Failed",
             "data":"Menu item can not be empty.Please enter a valid menu item"}

@@ -1,9 +1,9 @@
 from app import create_app
 import unittest
 import json
+from app.models import db
 
 config_name = "testing"
-app = create_app(config_name)
 
 class TestAuthenitication(unittest.TestCase):
     """
@@ -11,31 +11,21 @@ class TestAuthenitication(unittest.TestCase):
     """
 
     def setUp(self):
+        """ Set up test Variables"""
+        self.app = create_app(config_name="testing")
+        # initialize the test client
+        self.client = self.app.test_client
         app.testing = True
-        self.app = app.test_client()
-        self.data = {"username":"zeus",
-        				 "email":"email@gmail.com",
-        				 "password":"4084",
-                         "user_type":1
-                  
-                         }
-        self.data2 = {"username":"kwanj",
-        				 "email":"kwanj@gmail.com",
-        				 "password":"4084",
-                         "user_type":2
-                  
-                         }
-        self.data3 = {"username":"kelvin",
-        				 "email":"kelvin@gmail.com",
-        				 "password":"4084",
-                         "user_type":1
-                  
-                         }
-        self.data1 = {
-        				 "email":"email@gmail.com",
-        				 "password":"4084",
-                         }
-
+        self.data = {
+            "user_name":"theesus",
+        	"user_email":"email@gmail.com",
+        	"password":"theesus",
+            }
+        with self.app.app_context():
+            """ create all tables """
+            db.session.close()
+            db.drop_all()
+            db.create_all()
     def test_register(self):
         res = self.app.post("/api/v1/auth/register", 
                     data=json.dumps(self.data),
