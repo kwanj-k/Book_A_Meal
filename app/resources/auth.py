@@ -2,6 +2,11 @@ from flask import json, request
 from flask_restful import Resource
 from app.models import db, User
 from .validators import email_validator,password_validator,user_name_validator
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
+
 
 class RegisterResource(Resource):
     """
@@ -39,9 +44,21 @@ class LoginResource(Resource):
     Login Resource with a POST method
     """
     def post(self):
+        """Login  post method"""
         json_data = request.get_json(force=True)
-        user = User.query.filter_by(email=json_data['email']).first()
+        # if not json_data:
+        #     return {"status":"Failed!","data":"Please login with email and password"},401
+        if 'user_email' not in json_data or 'password' not in json_data:
+              return {"status": "Failed!",
+               "data": "Please supply , email and password"},406
+        if not email_validator(json_data['user_email']):
+            return {"status":"Failed!","data":"Please enter a valid email"}
+
+        user = User.query.filter_by(user_email=json_data['user_email']).first()
         if user and user.password_is_valid(json_data['password']):
             response = json.loads(json.dumps(user.json_dump()))
-            return {"status": "success", "data": response}, 201
-        return {"data":"Invalid login credentials."}
+            access_token = create_access_token(identity=json_data['user_email'])
+            return {"status": "success", 
+            "data": response, "token":access_token}, 200
+        return {"data":"Invalid login credentials"}
+

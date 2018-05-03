@@ -2,13 +2,18 @@ from flask import json, request
 from flask_restful import Resource
 from app.models import db, Order,Menu,Meal,User
 from .validators import mealname_and__menuitem_validator
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
+from .validators import require_admin
 
 class OrderResource(Resource):
     """
     Order Resource with GET, POST, PUT and DELETE methods
     """
     
-
+    @jwt_required
     def get(self, id):
         """
         Method gets a order by id.
@@ -19,7 +24,7 @@ class OrderResource(Resource):
             "data":"Order id does not exist.Please enter a valid order id"}
         response = order.json_dump()
         return response
-
+    @jwt_required
     def put(self, id):
         """
         Method updates order.
@@ -49,7 +54,7 @@ class OrderResource(Resource):
             response = order.json_dump()
             return{"status": "success", "data": response}, 200
 
-
+    @jwt_required
     def delete(self, id):
         """
          Method deletes a order by id.
@@ -70,6 +75,8 @@ class OrderListResource(Resource):
     """
     OrderList resource that has a get and post method.
     """
+    @jwt_required
+    @require_admin
     def get(self):
         """
         Method to get all orders.
@@ -77,6 +84,7 @@ class OrderListResource(Resource):
         orders = Order.query.all()
         response = [order.json_dump() for order in orders]
         return {"status": "success", "data": response}, 200
+    @jwt_required
     def post(self):
         """
          Method creates an order.

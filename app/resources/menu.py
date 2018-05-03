@@ -1,14 +1,17 @@
 from flask import json, request
 from flask_restful import Resource,reqparse
 from app.models import db, Menu,Meal
-
-
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
+from .validators import require_admin
 class MenuResource(Resource):
     """
     Menu Resource with GET, POST, PUT and DELETE methods
     """
-    
 
+    @jwt_required
     def get(self, id):
         """
         Method gets a menu by id.
@@ -19,7 +22,8 @@ class MenuResource(Resource):
             "data":"Menu id does not exist.Please enter a valid menu id"}
         response = menu.json_dump()
         return response
-
+    @jwt_required
+    @require_admin
     def put(self, id):
         """
         Method updates menu.
@@ -46,7 +50,8 @@ class MenuResource(Resource):
             response = menu.json_dump()
             return{"status": "success", "data": response}, 200
 
-
+    @jwt_required
+    @require_admin
     def delete(self, id):
         """
          Method deletes a menu by id.
@@ -67,6 +72,7 @@ class MenuListResource(Resource):
     """
     MenuList resource that has a get and post method.
     """
+    @jwt_required
     def get(self):
         """
         Method to get all menus.
@@ -74,6 +80,8 @@ class MenuListResource(Resource):
         menus = Menu.query.all()
         response = [menu.json_dump() for menu in menus]
         return {"status": "success", "data": response}, 200
+    @jwt_required
+    @require_admin
     def post(self):
         """
          Method creates a menu.

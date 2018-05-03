@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-
+import jwt
+from datetime import datetime, timedelta
 db = SQLAlchemy()
 
 from flask_bcrypt import Bcrypt
@@ -29,6 +30,8 @@ class User(db.Model):
         Checks the password against it's hash to validates the user's password
         """
         return Bcrypt().check_password_hash(self.password, password)
+
+    
 
     def save(self):
         """Save a user to the database.
