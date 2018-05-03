@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-
+import jwt
+from datetime import datetime, timedelta
 db = SQLAlchemy()
 
 from flask_bcrypt import Bcrypt
@@ -10,13 +11,18 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(256), nullable=False, unique=True)
-    password = db.Column(db.String(256), nullable=False)
+    user_name = db.Column(db.String(50), nullable=False, unique=True)
+    user_email = db.Column(db.String(50), nullable=False, unique=True)
+    password = db.Column(db.String(80), nullable=False)
+    admin   = db.Column(db.Boolean)
+    orders   = db.relationship('Order', backref='owner')
+    meals   = db.relationship('Meal', backref='owner')
 
-    def __init__(self, email,orders, password):
+    def __init__(self, user_email,user_name , password):
         """Initialize the user with an email,orders and a password."""
-        self.email = email
-        self.orders= orders
+        self.user_email = user_email
+        self.user_name = user_name
+    
         self.password = Bcrypt().generate_password_hash(password).decode()
 
     def password_is_valid(self, password):
@@ -24,6 +30,8 @@ class User(db.Model):
         Checks the password against it's hash to validates the user's password
         """
         return Bcrypt().check_password_hash(self.password, password)
+
+    
 
     def save(self):
         """Save a user to the database.
@@ -34,50 +42,63 @@ class User(db.Model):
 
     def json_dump(self):
         return dict(
-            email=self.email
+            id = self.id,
+            user_email=self.user_email,
+            user_name=self.user_name,
+            orders = self.orders,
+            meals= self.meals
         )
 class Meal(db.Model):
+    """
+    Meal model to define the meal. 
+    """
 
     __tablename__ = 'meals'
     id   = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), unique=True, nullable=False)
+    meal_name = db.Column(db.String(100), nullable=False)
+    menu_items   = db.relationship('Menu', passive_deletes=True, backref=db.backref('meal'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete='CASCADE'))
     date_created = db.Column(
         db.TIMESTAMP, server_default=db.func.current_timestamp(),
         nullable=False)
 
-    def __init__(self, name,menus):
+    def __init__(self, meal_name):
         """ Initialize with name of meal """
-        self.name = name
-
+        self.meal_name = meal_name
+    
     def json_dump(self):
+        """ Method to return a meal as a dict."""
         return dict(
-            name=self.name,
+            id= self.id,
+            meal_name=self.meal_name,
+            menu_items=[menu.json_dump() for menu in self.menu_items],
             date_created=str(self.date_created)
         )
 
     def save(self):
+        """ Save the meal to database"""
         db.session.add(self)
         db.session.commit()
 
 class Menu(db.Model):
+    """
+    Menu model to define the menu. 
+    """
     __tablename__ = 'menus'
     id = db.Column(db.Integer, primary_key=True)
-    item = db.Column(db.String(100), nullable=False)
+    menu_item = db.Column(db.String(100), nullable=False)
+    meal_id = db.Column(db.Integer, db.ForeignKey('meals.id',ondelete='CASCADE'))
     date_created = db.Column(
         db.TIMESTAMP, server_default=db.func.current_timestamp(),
         nullable=False)
-    # meal_id = db.Column(db.Integer, db.ForeignKey(
-    #     'meals.id', ondelete='CASCADE'), nullable=False)
-    # meal = db.relationship('Meal', backref=db.backref('menus',
-    #                                                   lazy='dynamic'))
 
-    def __init__(self, item,meal_id):
-        self.item = item
-        self.meal_id = meal_id
 
     def json_dump(self):
+        """ Method to return a meal as a dict."""
         return dict(
-            item=self.item,
+            id = self.id,
+            meal_id=self.meal_id,
+            menu_item=self.menu_item,
             date_created=str(self.date_created))
 
     def save(self):
@@ -85,18 +106,24 @@ class Menu(db.Model):
         db.session.commit()
 
 class Order(db.Model):
+    """
+    Order model to define the orders. 
+    """
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer,db.ForeignKey('menus.id'))
     quantity = db.Column(db.Integer, default=1)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete='CASCADE'))
     date_created = db.Column(
         db.TIMESTAMP, server_default=db.func.current_timestamp(),
         nullable=False)
 
-    def __init__(self,quantity):
-        self.quantity = quantity
 
     def json_dump(self):
+        """ Method to return an order as a dict."""
         return dict(
+            user_id=self.user_id,
+            item_id = self.item_id,
             quantity = self.quantity,
             date_created=str(self.date_created))
 
