@@ -31,8 +31,16 @@ def boolean_validator(bool):
 def require_admin(f):
     @wraps(f)
     def decorator(*args,**kwargs):
-        current_user =User.query.filter_by(is_admin=get_jwt_identity()).first()
-        if current_user.is_admin == 'False':
+        current_user =User.query.filter_by(email=get_jwt_identity()).first()
+        print(current_user)
+        if not current_user.is_admin:
             return {"status":"Failed!","data":"Only administrators can access these resource."}
         return f(*args, **kwargs)
     return decorator  
+def bool_transform(bool):
+    if bool == "true":
+        return User.is_admin == True
+    if bool == "false":
+        return User.is_admin == False
+    else:
+        return {"data":"Please enter true or false in the admin field."}

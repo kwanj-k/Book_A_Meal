@@ -1,7 +1,11 @@
 from flask import json, request
 from flask_restful import Resource
 from app.models import db, User
-from .validators import email_validator,password_validator,user_name_validator,boolean_validator
+from .validators import (email_validator,
+                            password_validator,
+                            user_name_validator,
+                    
+)
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -26,11 +30,19 @@ class RegisterResource(Resource):
                 return {"status":"Failed!","data":"Too short password"}
             if not user_name_validator(json_data['username']):
                 return {"status":"Failed!","data":"Please use a username without special characters."}
-            if not user_name_validator(json_data['is_admin']) or boolean_validator(json_data['is_admin']) :
-                return {"status":"Failed!","data":"Please use either True or Fale for the is_admin field."}
+            if not user_name_validator(json_data['is_admin']): 
+
+                return {"status":"Failed!","data":"Please use either True or False for the is_admin field."}
+            def bool_transform(strng):
+                if strng == "true":
+                    return True
+                if strng == "false":
+                    return False
+                else:
+                    return {"data":"Please enter true or false in the admin field"}
             account = User(username=json_data['username'],
                             email=json_data['email'],
-                            is_admin=json_data['is_admin'],
+                            is_admin=bool_transform(json_data['is_admin']),
                             password=json_data['password'])
             account.save()
             response = json.loads(json.dumps(account.json_dump()))
