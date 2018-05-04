@@ -11,18 +11,18 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(50), nullable=False, unique=True)
-    user_email = db.Column(db.String(50), nullable=False, unique=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
+    email = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
-    admin   = db.Column(db.Boolean)
-    orders   = db.relationship('Order', backref='owner')
-    meals   = db.relationship('Meal', backref='owner')
+    is_admin   = db.Column(db.Boolean)
+    orders   = db.relationship('Order', backref='owner,', passive_deletes=True)
+    meals   = db.relationship('Meal', backref='owner', passive_deletes=True)
 
-    def __init__(self, user_email,user_name , password):
+    def __init__(self, email,username, password,is_admin):
         """Initialize the user with an email,orders and a password."""
-        self.user_email = user_email
-        self.user_name = user_name
-    
+        self.email = email
+        self.username = username
+        self.is_admin = is_admin
         self.password = Bcrypt().generate_password_hash(password).decode()
 
     def password_is_valid(self, password):
@@ -43,8 +43,8 @@ class User(db.Model):
     def json_dump(self):
         return dict(
             id = self.id,
-            user_email=self.user_email,
-            user_name=self.user_name,
+            email=self.email,
+            username=self.username,
             orders = self.orders,
             meals= self.meals
         )

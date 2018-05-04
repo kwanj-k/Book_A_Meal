@@ -9,6 +9,7 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity,exceptions
 )
+from datetime import timedelta
 # from flask_jwt_extended.exceptions import NoAuthorizationError
 
 jwt = JWTManager()
@@ -20,18 +21,19 @@ def create_app(config_name):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.url_map.strict_slashes = False
     app.config['JWT_SECRET_KEY'] = 'super-secret-key-that' 
+    JWT_EXPIRATION_DELTA = timedelta(seconds=14200)
     jwt.init_app(app)
     from app.models import db
     db.init_app(app)
 
-    api.add_resource(MealListResource, '/api/v1/meals')
-    api.add_resource(MealResource, '/api/v1/meals/<int:id>')
-    api.add_resource(MenuListResource, '/api/v1/menus')
-    api.add_resource(MenuResource, '/api/v1/menus/<int:id>')
-    api.add_resource(OrderListResource, '/api/v1/orders')
-    api.add_resource(OrderResource, '/api/v1/orders/<int:id>')
-    api.add_resource(RegisterResource, '/api/v1/auth/register')
-    api.add_resource(LoginResource, '/api/v1/auth/login')
+    api.add_resource(MealListResource, '/api/v2/meals')
+    api.add_resource(MealResource, '/api/v2/meals/<int:id>')
+    api.add_resource(MenuListResource, '/api/v2/menus')
+    api.add_resource(MenuResource, '/api/v2/menus/<int:id>')
+    api.add_resource(OrderListResource, '/api/v2/orders')
+    api.add_resource(OrderResource, '/api/v2/orders/<int:id>')
+    api.add_resource(RegisterResource, '/api/v2/auth/register')
+    api.add_resource(LoginResource, '/api/v2/auth/login')
     
     
     return app
