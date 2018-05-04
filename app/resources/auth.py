@@ -4,6 +4,7 @@ from app.models import db, User
 from .validators import (email_validator,
                             password_validator,
                             user_name_validator,
+                            space_stripper
                     
 )
 from flask_jwt_extended import (
@@ -40,10 +41,10 @@ class RegisterResource(Resource):
                     return False
                 else:
                     return {"data":"Please enter true or false in the admin field"}
-            account = User(username=json_data['username'],
+            account = User(username=space_stripper(json_data['username']),
                             email=json_data['email'],
                             is_admin=bool_transform(json_data['is_admin']),
-                            password=json_data['password'])
+                            password=space_stripper(json_data['password']))
             account.save()
             response = json.loads(json.dumps(account.json_dump()))
             return {"status": "success", "data": response}, 201

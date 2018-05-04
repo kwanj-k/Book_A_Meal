@@ -33,10 +33,10 @@ class MealResource(Resource):
         Method updates meal.
         """
         json_data = request.get_json(force=True)
-        meal_name = json_data['meal_name']
-        meal = Meal.query.filter_by(id=id).first()
         if 'meal_name' not in json_data:
             return {"status":"Failed!","data":"Please provide a meal a name."}
+        meal_name = json_data['meal_name']
+        meal = Meal.query.filter_by(id=id).first()
         if meal is None:
             return {"status":"Failed!!",
             "data":"Meal id does not exist.Please enter a valid meal id"}
@@ -86,9 +86,9 @@ class MealListResource(Resource):
          Method creates a meal.
         """
         json_data = request.get_json(force=True)
-        meal_name = json_data['meal_name']
         if 'meal_name' not in json_data:
             return {"status":"Failed!","data":"Please provide a meal a name."}
+        meal_name = json_data['meal_name']
         if meal_name == '':
             return {"status":"Failed",
             "data":"Meal name can not be empty.Please enter a valid meal name"}
