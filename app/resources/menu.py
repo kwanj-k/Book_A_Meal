@@ -30,7 +30,7 @@ class MenuResource(Resource):
         """
         json_data = request.get_json(force=True)
         menu = Menu.query.filter_by(id=id).first()
-        if 'meal_id' or 'menu_item' not in json_data:
+        if 'meal_id' not in json_data or 'menu_item' not in json_data:
             return {"status":"Failed!","data":"Please provide a meal_id and menu_item to update."}
         if  menu is None:
             return {"status":"Failed!!",
@@ -63,7 +63,7 @@ class MenuResource(Resource):
             return {"status":"Failed!!",
             "data":"Menu id does not exist.Please enter a valid meal id"}
         else:
-            menu.delete()
+            Menu.query.filter_by(id=id).delete()
             db.session.commit()
             response = json.loads(json.dumps(json_data))
             return {"status": "deleted!", "data": response}, 200
@@ -88,12 +88,13 @@ class MenuListResource(Resource):
          Method creates a menu.
         """
         json_data = request.get_json(force=True)
+        
+        if 'meal_id'not in json_data or 'menu_item' not in json_data:
+            return {"status":"Failed!",
+                    "data":"Please a valid provide a meal_id and menu_item to create menu."}
         menu_item = json_data['menu_item']
         meal_id   = json_data['meal_id']
         meal= Meal.query.filter_by(id=meal_id).first()
-        if 'meal_id' or 'menu_item' not in json_data:
-            return {"status":"Failed!",
-                    "data":"Please provide a meal_id and menu_item to update."}
         if menu_item == '':
             return {"status":"Failed",
             "data":"Menu item can not be empty.Please enter a valid menu item"}
@@ -102,8 +103,7 @@ class MenuListResource(Resource):
             "data":"Meal id can not be empty.Please enter a valid meal id"}
         if  meal is None:
             return {"status":"Failed!!","data":"Please enter a valid meal id"}
-        else:
-            menu = Menu(meal_id=meal_id,menu_item=menu_item)
-            menu.save()
-            response = json.loads(json.dumps(meal.json_dump()))
-            return {"status": "success", "data": response}, 201
+        menu = Menu(meal_id=meal_id,menu_item=menu_item)
+        menu.save()
+        response = json.loads(json.dumps(menu.json_dump()))
+        return {"status": "success", "data": response}, 201

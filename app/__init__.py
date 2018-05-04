@@ -21,7 +21,7 @@ def create_app(config_name):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.url_map.strict_slashes = False
     app.config['JWT_SECRET_KEY'] = 'super-secret-key-that' 
-    JWT_EXPIRATION_DELTA = timedelta(seconds=14200)
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=72)
     jwt.init_app(app)
     from app.models import db
     db.init_app(app)
