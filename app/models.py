@@ -45,6 +45,7 @@ class User(db.Model):
             id = self.id,
             email=self.email,
             username=self.username,
+            is_admin=self.is_admin,
             orders = self.orders,
             meals= self.meals
         )
