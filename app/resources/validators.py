@@ -7,8 +7,22 @@ from flask_jwt_extended import (
 )
 
 def space_stripper(data):
-    striped = re.sub(r'[\s]+','',data)
+    striped = "".join(data.split())
     return striped
+
+def bool_transform(data):
+    strng = "".join(data.split())
+    if strng == "true":
+        return True
+    if strng == "false":
+        return False
+    else:
+        return {"data":"Please enter true or false in the admin field"}  
+
+def num_check(data):
+    num = re.compile("^[\-]?[1-9][0-9]*\.?[0-9]+$")
+    if re.match(num,data):
+        return True  
 def email_validator(email):
     '''validates user provided email'''
     if re.match(
@@ -22,12 +36,14 @@ def password_validator(password):
     if len(password) > 6 and striped != '':
         return True
 
-def user_name_validator(username):
+def user_name_validator(data):
     '''validates user provided username'''
-    if re.match("^[a-zA-Z0-9_]*$", username):
+    username = "".join(data.split())
+    striped = re.sub(r'[\s]+','',username)
+    if re.match("^[a-zA-Z0-9_]*$", username) and striped != '':
         return True
 
-def mealname_and__menuitem_validator(name):
+def name_validator(name):
     '''Validates names provided for meals and menus'''
     if re.match("^[a-zA-Z0-9_\s]*$", name):
         return True

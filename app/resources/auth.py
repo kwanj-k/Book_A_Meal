@@ -4,7 +4,8 @@ from app.models import db, User
 from .validators import (email_validator,
                             password_validator,
                             user_name_validator,
-                            space_stripper
+                            space_stripper,
+                            bool_transform
                     
 )
 from flask_jwt_extended import (
@@ -24,23 +25,19 @@ class RegisterResource(Resource):
               return {"status": "Failed!",
                "data": "Please supply username,email,password and whether admin"},406
         user = User.query.filter_by(email=json_data['email']).first()
+        #name = User.query.filter_by(username=json_data['username']).first()
         if not user:
             if not email_validator(json_data['email']):
                 return {"status":"Failed!","data":"Please enter a valid email."}
             if not password_validator(json_data['password']):
                 return {"status":"Failed!","data":"Too short password"}
             if not user_name_validator(json_data['username']):
-                return {"status":"Failed!","data":"Please use a username without special characters."}
+                return {"status":"Failed!",
+                "data":"Username cannot be empty or have special characters."}
             if not user_name_validator(json_data['is_admin']): 
 
                 return {"status":"Failed!","data":"Please use either True or False for the is_admin field."}
-            def bool_transform(strng):
-                if strng == "true":
-                    return True
-                if strng == "false":
-                    return False
-                else:
-                    return {"data":"Please enter true or false in the admin field"}
+            
             account = User(username=space_stripper(json_data['username']),
                             email=json_data['email'],
                             is_admin=bool_transform(json_data['is_admin']),

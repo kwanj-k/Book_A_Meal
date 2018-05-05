@@ -5,7 +5,7 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
-from .validators import require_admin
+from .validators import require_admin,space_stripper,name_validator,num_check
 class MenuResource(Resource):
     """
     Menu Resource with GET, POST, PUT and DELETE methods
@@ -32,6 +32,8 @@ class MenuResource(Resource):
         menu = Menu.query.filter_by(id=id).first()
         if 'meal_id' not in json_data or 'menu_item' not in json_data:
             return {"status":"Failed!","data":"Please provide a meal_id and menu_item to update."}
+        if not num_check( json_data['meal_id']):
+            return {"status":"Failed!"}
         if  menu is None:
             return {"status":"Failed!!",
             "data":"Menu id does not exist.Please enter a valid meal id"}
@@ -92,15 +94,20 @@ class MenuListResource(Resource):
         if 'meal_id'not in json_data or 'menu_item' not in json_data:
             return {"status":"Failed!",
                     "data":"Please a valid provide a meal_id and menu_item to create menu."}
+        if not num_check( json_data['meal_id']):
+            return {"status":"Failed!"}
         menu_item = json_data['menu_item']
         meal_id   = json_data['meal_id']
         meal= Meal.query.filter_by(id=meal_id).first()
-        if menu_item == '':
+        if space_stripper(menu_item) == '' or name_validator(menu_item):
             return {"status":"Failed",
-            "data":"Menu item can not be empty.Please enter a valid menu item"}
+            "data":"Menu item can neither be empty nor contain special characters."}
         elif meal_id == '' :
             return {"status":"Failed",
             "data":"Meal id can not be empty.Please enter a valid meal id"}
+        if  type(meal_id) == str:
+            return {"status":"Failed!",
+            "messsage":"Meal id must be an integer."},406
         if  meal is None:
             return {"status":"Failed!!","data":"Please enter a valid meal id"}
         menu = Menu(meal_id=meal_id,menu_item=menu_item)

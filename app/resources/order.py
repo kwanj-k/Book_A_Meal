@@ -1,12 +1,12 @@
 from flask import json, request
 from flask_restful import Resource
 from app.models import db, Order,Menu,Meal,User
-from .validators import mealname_and__menuitem_validator
+from .validators import name_validator
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
-from .validators import require_admin
+from .validators import require_admin,num_check
 
 class OrderResource(Resource):
     """
@@ -38,6 +38,8 @@ class OrderResource(Resource):
              'item_id' not in json_data or 'quantity' not in json_data:
               return {"status": "Failed!",
                "data": "Please supply user id, item id and quantity"},406
+        elif not num_check( json_data['meal_id']) or not num_check(json_data['item_id']) or not num_check(json_data['quantity']):
+            return {"status":"Failed!"}
         item= Menu.query.filter_by(id=json_data['item_id']).first()
         if  item is None:
             return {"status":"Failed!!",
@@ -94,6 +96,8 @@ class OrderListResource(Resource):
              'item_id' not in json_data or 'quantity' not in json_data:
               return {"status": "Failed!",
                "data": "Please supply user id, item id and quantity"},406
+        if  not num_check(json_data['item_id']) or not num_check(json_data['quantity']):
+            return {"status":"Failed!"}
         item_id = json_data['item_id']
         user_id   = json_data['user_id']
         quantity = json_data['quantity']

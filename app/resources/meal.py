@@ -5,7 +5,7 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
-from .validators import require_admin,mealname_and__menuitem_validator
+from .validators import require_admin,name_validator,space_stripper
 
 
 class MealResource(Resource):
@@ -40,11 +40,11 @@ class MealResource(Resource):
         if meal is None:
             return {"status":"Failed!!",
             "data":"Meal id does not exist.Please enter a valid meal id"}
-        if meal_name == '' or not mealname_and__menuitem_validator(json_data['meal_name']):
+        if meal_name == '' or not name_validator(json_data['meal_name']):
             return {"status":"Failed!!",
-            "data":"Meal name can not be empty.Please enter a valid meal name"}
+            "data":"Meal name can not be empty or contain special characters."}
         else:
-            meal.meal_name = meal_name
+            meal.meal_name =space_stripper(meal_name)
             db.session.commit()
             response = meal.json_dump()
             return{"status": "success", "data": response}, 200
@@ -89,9 +89,9 @@ class MealListResource(Resource):
         if 'meal_name' not in json_data:
             return {"status":"Failed!","data":"Please provide a meal a name."}
         meal_name = json_data['meal_name']
-        if meal_name == '':
+        if meal_name == '' or not name_validator(meal_name):
             return {"status":"Failed",
-            "data":"Meal name can not be empty.Please enter a valid meal name"}
+            "data":"Meal name can neither be empty nor contain special characters."}
         meal = Meal(meal_name=meal_name)
         meal.save()
         response = json.loads(json.dumps(meal.json_dump()))
