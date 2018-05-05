@@ -6,10 +6,10 @@ from flask_jwt_extended import JWTManager
 from datetime import timedelta
 
 from config import app_config
-from app.resources.meal import MealResource, MealListResource
-from app.resources.menu import MenuResource, MenuListResource
-from app.resources.order import OrderResource, OrderListResource
-from app.resources.auth import RegisterResource, LoginResource
+from app.views.meal import Meals, MealList
+from app.views.menu import Menus, MenuList
+from app.views.order import Orders, OrderList
+from app.views.auth import Register, Login
 
 jwt = JWTManager()
 
@@ -26,13 +26,13 @@ def create_app(config_name):
     from app.models import db
     db.init_app(app)
 
-    api.add_resource(MealListResource, '/api/v2/meals')
-    api.add_resource(MealResource, '/api/v2/meals/<int:id>')
-    api.add_resource(MenuListResource, '/api/v2/menus')
-    api.add_resource(MenuResource, '/api/v2/menus/<int:id>')
-    api.add_resource(OrderListResource, '/api/v2/orders')
-    api.add_resource(OrderResource, '/api/v2/orders/<int:id>')
-    api.add_resource(RegisterResource, '/api/v2/auth/register')
-    api.add_resource(LoginResource, '/api/v2/auth/login')
+    api.add_resource(MealList, '/api/v2/meals')
+    api.add_resource(Meals, '/api/v2/meals/<int:id>')
+    api.add_resource(MenuList, '/api/v2/menus')
+    api.add_resource(Menus, '/api/v2/menus/<int:id>')
+    api.add_resource(OrderList, '/api/v2/orders')
+    api.add_resource(Orders, '/api/v2/orders/<int:id>')
+    api.add_resource(Register, '/api/v2/auth/register')
+    api.add_resource(Login, '/api/v2/auth/login')
 
     return app

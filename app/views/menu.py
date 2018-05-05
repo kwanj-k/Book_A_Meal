@@ -10,7 +10,7 @@ from app.models import db, Menu, Meal
 from .validators import require_admin, space_stripper, name_validator, num_check
 
 
-class MenuResource(Resource):
+class Menus(Resource):
     """
     Menu Resource with GET, POST, PUT and DELETE methods
     """
@@ -35,7 +35,7 @@ class MenuResource(Resource):
         """
         json_data = request.get_json(force=True)
         menu = Menu.query.filter_by(id=id).first()
-        if 'meal_id' not in json_data or 'menu_item' not in json_data:
+        if 'meal_id' not in json_data or 'meal_item' not in json_data:
             return {"status": "Failed!", "message": "Please provide a meal_id and meal_item to update."}, 406
         if not num_check(json_data['meal_id']):
             return {"status": "Failed!",
@@ -47,14 +47,14 @@ class MenuResource(Resource):
         if meal is None:
             return {"status": "Failed!",
                     "message": "Meal does not exist."}, 404
-        if json_data['menu_item'] == '':
+        if json_data['meal_item'] == '':
             return {"status": "Failed!",
                     "message": "Meal item can not be empty."}, 406
         else:
             if json_data['meal_id']:
                 menu.meal_id = json_data['meal_id']
-            if json_data['menu_item']:
-                menu.menu_item = json_data['menu_item']
+            if json_data['meal_item']:
+                menu.meal_item = json_data['meal_item']
             db.session.commit()
             response = menu.json_dump()
             return{"status": "success", "data": response}, 200
@@ -77,7 +77,7 @@ class MenuResource(Resource):
             return {"status": "deleted!", "data": response}, 200
 
 
-class MenuListResource(Resource):
+class MenuList(Resource):
     """
     MenuList resource that has a get and post method.
     """
@@ -98,15 +98,15 @@ class MenuListResource(Resource):
         """
         json_data = request.get_json(force=True)
 
-        if 'meal_id'not in json_data or 'menu_item' not in json_data:
+        if 'meal_id'not in json_data or 'meal_item' not in json_data:
             return {"status": "Failed!",
-                    "message": "Please a valid provide a meal_id and menu_item to create menu."}, 406
+                    "message": "Please a valid provide a meal_id and meal_item to create menu."}, 406
         if not num_check(json_data['meal_id']):
             return {"status": "Failed!", "message": "Meal id must be an integer"}, 406
-        menu_item = json_data['menu_item']
+        meal_item = json_data['meal_item']
         meal_id = json_data['meal_id']
         meal = Meal.query.filter_by(id=meal_id).first()
-        if space_stripper(menu_item) == '':
+        if space_stripper(meal_item) == '':
             return {"status": "Failed!",
                     "message": "Menu item can neither be empty nor contain special characters."}, 406
         if meal_id == '':
@@ -114,7 +114,7 @@ class MenuListResource(Resource):
                     "message": "Meal id can not be empty."}, 406
         if meal is None:
             return {"status": "Failed!", "message": "Meal id does not exist."}, 404
-        menu = Menu(meal_id=meal_id, menu_item=menu_item)
+        menu = Menu(meal_id=meal_id, meal_item=meal_item)
         menu.save()
         response = json.loads(json.dumps(menu.json_dump()))
         return {"status": "success", "data": response}, 201

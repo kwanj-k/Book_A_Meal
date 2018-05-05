@@ -14,7 +14,7 @@ from .validators import (email_validator,
                          bool_transform)
 
 
-class RegisterResource(Resource):
+class Register(Resource):
     """
     Registration Resource with a POST method
     """
@@ -50,7 +50,7 @@ class RegisterResource(Resource):
             return {"status": "Failed!", "message": "Email already in use by existing user"}, 406
 
 
-class LoginResource(Resource):
+class Login(Resource):
     """
     Login Resource with a POST method
     """

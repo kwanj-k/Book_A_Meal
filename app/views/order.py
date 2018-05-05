@@ -8,7 +8,7 @@ from app.models import db, Order, Menu, Meal, User
 from .validators import require_admin, num_check, name_validator
 
 
-class OrderResource(Resource):
+class Orders(Resource):
     """
     Order Resource with GET, POST, PUT and DELETE methods
     """
@@ -74,7 +74,7 @@ class OrderResource(Resource):
             return {"status": "deleted!", "data": response}, 200
 
 
-class OrderListResource(Resource):
+class OrderList(Resource):
     """
     OrderList resource that has a get and post method.
     """
