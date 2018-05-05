@@ -70,7 +70,6 @@ def require_admin(f):
     @wraps(f)
     def decorator(*args, **kwargs):
         current_user = User.query.filter_by(email=get_jwt_identity()).first()
-        print(current_user)
         if not current_user.is_admin:
             return {"status": "Failed!", "data": "Only administrators can access these resource."}
         return f(*args, **kwargs)

@@ -69,15 +69,17 @@ class Meal(db.Model):
         db.TIMESTAMP, server_default=db.func.current_timestamp(),
         nullable=False)
 
-    def __init__(self, meal_name):
+    def __init__(self, meal_name, user_id):
         """ Initialize with name of meal """
         self.meal_name = meal_name
+        self.user_id = user_id
 
     def json_dump(self):
         """ Method to return a meal as a dict."""
         return dict(
             id=self.id,
             meal_name=self.meal_name,
+            user_id=self.user_id,
             meal_items=[menu.json_dump() for menu in self.meal_items],
             date_created=str(self.date_created)
         )
@@ -109,6 +111,7 @@ class Menu(db.Model):
             id=self.id,
             meal_id=self.meal_id,
             meal_item=self.meal_item,
+            user_id=self.user_id,
             date_created=str(self.date_created))
 
     def save(self):
@@ -124,7 +127,8 @@ class Order(db.Model):
     """
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
-    item_id = db.Column(db.Integer, db.ForeignKey('menus.id'))
+    item_id = db.Column(db.Integer, db.ForeignKey(
+        'menus.id', ondelete='CASCADE'))
     quantity = db.Column(db.Integer, default=1)
     user_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete='CASCADE'))
