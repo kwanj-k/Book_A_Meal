@@ -1,17 +1,17 @@
+""" Authenitication resource for registration and login"""
+
 from flask import json, request
 from flask_restful import Resource
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity)
+
 from app.models import db, User
-from .validators import (email_validator,
+from .validators import (   email_validator,
                             password_validator,
                             user_name_validator,
                             space_stripper,
-                            bool_transform
-                    
-)
-from flask_jwt_extended import (
-    JWTManager, jwt_required, create_access_token,
-    get_jwt_identity
-)
+                            bool_transform)
 
 
 class RegisterResource(Resource):
@@ -23,20 +23,20 @@ class RegisterResource(Resource):
         if 'username' not in json_data or \
              'email' not in json_data or 'password' not in json_data or 'is_admin' not in json_data:
               return {"status": "Failed!",
-               "data": "Please supply username,email,password and whether admin"},406
+               "message": "Please supply username,email,password and whether admin"},406
         user = User.query.filter_by(email=json_data['email']).first()
-        #name = User.query.filter_by(username=json_data['username']).first()
         if not user:
             if not email_validator(json_data['email']):
-                return {"status":"Failed!","data":"Please enter a valid email."}
+                return {"status":"Failed!","message":"Please enter a valid email."},406
             if not password_validator(json_data['password']):
-                return {"status":"Failed!","data":"Too short password"}
+                return {"status":"Failed!","message":"Too short password"},406
             if not user_name_validator(json_data['username']):
                 return {"status":"Failed!",
-                "data":"Username cannot be empty or have special characters."}
+                "message":"Username cannot be empty or have special characters."},406
             if not user_name_validator(json_data['is_admin']): 
 
-                return {"status":"Failed!","data":"Please use either True or False for the is_admin field."}
+                return {"status":"Failed!",
+                "message":"Please use either True or False for the is_admin field."},406
             
             account = User(username=space_stripper(json_data['username']),
                             email=json_data['email'],
@@ -46,7 +46,7 @@ class RegisterResource(Resource):
             response = json.loads(json.dumps(account.json_dump()))
             return {"status": "success", "data": response}, 201
         else:
-            return {"status":"Failed!","data":"Email already in use by existing user"}
+            return {"status":"Failed!","message":"Email already in use by existing user"},406
 
 
 class LoginResource(Resource):
@@ -58,9 +58,9 @@ class LoginResource(Resource):
         json_data = request.get_json(force=True)
         if 'email' not in json_data or 'password' not in json_data:
               return {"status": "Failed!",
-               "data": "Please supply , email and password"},406
+               "message": "Please supply , email and password"},406
         if not email_validator(json_data['email']):
-            return {"status":"Failed!","data":"Please enter a valid email"}
+            return {"status":"Failed!","message":"Please enter a valid email"},406
 
         user = User.query.filter_by(email=json_data['email']).first()
         if user and user.password_is_valid(json_data['password']):
@@ -68,5 +68,5 @@ class LoginResource(Resource):
             access_token = create_access_token(identity=json_data['email'])
             return {"status": "success", 
             "data": response, "token":access_token}, 200
-        return {"data":"Invalid login credentials"}
+        return {"message":"Invalid login credentials"},406
 

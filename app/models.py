@@ -1,8 +1,9 @@
+""" Models to models all the app entities"""
+
 from flask_sqlalchemy import SQLAlchemy
 import jwt
 from datetime import datetime, timedelta
 db = SQLAlchemy()
-
 from flask_bcrypt import Bcrypt
 
 class User(db.Model):
@@ -34,13 +35,12 @@ class User(db.Model):
     
 
     def save(self):
-        """Save a user to the database.
-        This includes creating a new user and editing one.
-        """
+        """Save a user to the database."""
         db.session.add(self)
         db.session.commit()
 
     def json_dump(self):
+        """ Method user information in json format."""
         return dict(
             id = self.id,
             email=self.email,
@@ -103,6 +103,8 @@ class Menu(db.Model):
             date_created=str(self.date_created))
 
     def save(self):
+        """ Save meal item to database"""
+
         db.session.add(self)
         db.session.commit()
 
@@ -129,6 +131,7 @@ class Order(db.Model):
             date_created=str(self.date_created))
 
     def save(self):
+        """ Save order to database."""
         db.session.add(self)
         db.session.commit()
     

@@ -1,12 +1,11 @@
+""" Meal resource to create all endpoints related to meals """
+
 from flask import json, request
 from flask_restful import reqparse,Resource
-from app.models import db, Meal,User
-from flask_jwt_extended import (
-    JWTManager, jwt_required, create_access_token,
-    get_jwt_identity
-)
-from .validators import require_admin,name_validator,space_stripper
+from flask_jwt_extended import (jwt_required,get_jwt_identity)
 
+from app.models import db, Meal,User
+from .validators import require_admin,name_validator,space_stripper
 
 class MealResource(Resource):
     """
@@ -22,7 +21,7 @@ class MealResource(Resource):
         meal = Meal.query.filter_by(id=id).first()
         if meal is None:
             return {"status":"Failed!!",
-            "data":"Meal id does not exist.Please enter a valid meal id"}
+            "message":"Meal does not exist."},404
         
         response = meal.json_dump()
         return response
@@ -34,15 +33,15 @@ class MealResource(Resource):
         """
         json_data = request.get_json(force=True)
         if 'meal_name' not in json_data:
-            return {"status":"Failed!","data":"Please provide a meal a name."}
+            return {"status":"Failed!","message":"Please provide a meal a name."},406
         meal_name = json_data['meal_name']
         meal = Meal.query.filter_by(id=id).first()
         if meal is None:
             return {"status":"Failed!!",
-            "data":"Meal id does not exist.Please enter a valid meal id"}
+            "message":"Meal does not exist."},404
         if meal_name == '' or not name_validator(json_data['meal_name']):
             return {"status":"Failed!!",
-            "data":"Meal name can not be empty or contain special characters."}
+            "message":"Meal name can not be empty or contain special characters."},406
         else:
             meal.meal_name =space_stripper(meal_name)
             db.session.commit()
@@ -58,7 +57,7 @@ class MealResource(Resource):
         meal= Meal.query.filter_by(id=id).first()
         if  meal is None:
             return {"status":"Failed!!",
-            "data":"Meal id does not exist.Please enter a valid meal id"}
+            "data":"Meal does not exist."},404
         else:
             Meal.query.filter_by(id=id).delete()
             db.session.commit()
@@ -87,11 +86,11 @@ class MealListResource(Resource):
         """
         json_data = request.get_json(force=True)
         if 'meal_name' not in json_data:
-            return {"status":"Failed!","data":"Please provide a meal a name."}
+            return {"status":"Failed!","data":"Please provide a meal a name."},406
         meal_name = json_data['meal_name']
         if meal_name == '' or not name_validator(meal_name):
             return {"status":"Failed",
-            "data":"Meal name can neither be empty nor contain special characters."}
+            "message":"Meal name can neither be empty nor contain special characters."},406
         meal = Meal(meal_name=meal_name)
         meal.save()
         response = json.loads(json.dumps(meal.json_dump()))

@@ -1,16 +1,15 @@
-from flask import Flask, request, jsonify, make_response
-from flask_restful import reqparse, abort, Api, Resource
+""" App module to bring together the whole app."""
+
+from flask import Flask
+from flask_restful import Api
+from flask_jwt_extended import JWTManager
+from datetime import timedelta
+
 from config import app_config
 from app.resources.meal import MealResource,MealListResource
 from app.resources.menu import MenuResource,MenuListResource
 from app.resources.order import OrderResource,OrderListResource
 from app.resources.auth import RegisterResource, LoginResource
-from flask_jwt_extended import (
-    JWTManager, jwt_required, create_access_token,
-    get_jwt_identity,exceptions
-)
-from datetime import timedelta
-# from flask_jwt_extended.exceptions import NoAuthorizationError
 
 jwt = JWTManager()
 
