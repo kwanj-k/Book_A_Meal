@@ -48,7 +48,7 @@ class RegisterResource(Resource):
             response = json.loads(json.dumps(account.json_dump()))
             return {"status": "success", "data": response}, 201
         else:
-            return {"status":"Failed!","data":"Email already in use by existing user"}
+            return {"messsage":"Email already in use by existing user"},202
 
 
 class LoginResource(Resource):
@@ -70,5 +70,5 @@ class LoginResource(Resource):
             access_token = create_access_token(identity=json_data['email'])
             return {"status": "success", 
             "data": response, "token":access_token}, 200
-        return {"data":"Invalid login credentials"}
+        return {"data":"Invalid login credentials"},401
 
