@@ -96,13 +96,13 @@ class OrderList(Resource):
          Method creates an order.
         """
         json_data = request.get_json(force=True)
-        current_user = User.query.filter_by(email=get_jwt_identity()).first()
+
         if 'item_id' not in json_data or 'quantity' not in json_data:
             return {"status": "Failed!",
-                    "message": "Please supply user id, item id and quantity"}, 406
+                    "message": "Please supply  item id and quantity"}, 406
         if not num_check(json_data['item_id']) or not num_check(json_data['quantity']):
             return {"status": "Failed!", "message": "Item and quantity id must be integers"}, 406
-        user_id = current_user.id
+
         item_id = json_data['item_id']
         quantity = json_data['quantity']
         item = Menu.query.filter_by(id=item_id).first()
@@ -115,6 +115,8 @@ class OrderList(Resource):
         if item is None:
             return {"status": "Failed!",
                     "data": "Item id does not exist."}, 404
+        current_user = User.query.filter_by(email=get_jwt_identity()).first()
+        user_id = current_user.id
         order = Order(user_id=user_id, item_id=item_id, quantity=quantity)
         order.save()
         response = json.loads(json.dumps(order.json_dump()))
