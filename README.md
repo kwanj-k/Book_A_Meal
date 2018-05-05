@@ -1,5 +1,5 @@
 ### Book_A_Meal_The_App
-[![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=develop)](https://travis-ci.org/kwanj-k/Book_A_Meal)  [![Coverage Status](https://coveralls.io/repos/github/kwanj-k/Book_A_Meal/badge.svg?branch=api-v1)](https://coveralls.io/github/kwanj-k/Book_A_Meal?branch=api-v1)
+[![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=api-v2)](https://travis-ci.org/kwanj-k/Book_A_Meal)  [![Coverage Status](https://coveralls.io/repos/github/kwanj-k/Book_A_Meal/badge.svg?branch=api-v2)](https://coveralls.io/github/kwanj-k/Book_A_Meal?branch=api-v2)
 
 
 This is an Application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
@@ -16,7 +16,7 @@ Clone the repository:
 Navigate to the cloned repo. 
 Pull the branch with the API.
 
-```git pull origin api-v1```
+```git pull origin api-v2```
 
 ### Prerequisites
 
@@ -31,7 +31,7 @@ Create a virtualenv and activate it. [Refer here](https://docs.python.org/3/tuto
 - Install the project dependencies:
 > $ pip install -r requirements.txt
 - On your terminal with the env still activated.Run:
-> $ export FLASK_APP="run.py"
+> $ export FLASK_APP="manage.py"
 
 > $ export APP_SETTINGS="development"
 
@@ -45,11 +45,11 @@ This should run all the tests and give test coverage.
 
 ### Testing API EndPoints
 Start the development server with:
-> $ python run.py
+> $ flask run
 
 FireUp PostMan and test the different API endpoints from the table below. 
 
-Ensure the URLs are prefixed with ``` /api/v1 ```
+Ensure the URLs are prefixed with ``` /api/v2 ```
 
 
 | EndPoint                       | Functionality                           | 
