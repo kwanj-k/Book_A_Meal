@@ -19,6 +19,7 @@ class User(db.Model):
     is_admin = db.Column(db.Boolean)
     orders = db.relationship('Order', backref='owner,', passive_deletes=True)
     meals = db.relationship('Meal', backref='owner', passive_deletes=True)
+    menus = db.relationship('Menu', backref='owner', passive_deletes=True)
 
     def __init__(self, email, username, password, is_admin):
         """Initialize the user with an email,orders and a password."""
@@ -46,7 +47,9 @@ class User(db.Model):
             username=self.username,
             is_admin=self.is_admin,
             orders=self.orders,
-            meals=self.meals
+            meals=self.meals,
+            menus=self.menus
+
         )
 
 
@@ -58,7 +61,7 @@ class Meal(db.Model):
     __tablename__ = 'meals'
     id = db.Column(db.Integer, primary_key=True)
     meal_name = db.Column(db.String(100), nullable=False)
-    menu_items = db.relationship(
+    meal_items = db.relationship(
         'Menu', passive_deletes=True, backref=db.backref('meal'))
     user_id = db.Column(db.Integer, db.ForeignKey(
         'users.id', ondelete='CASCADE'))
@@ -75,7 +78,7 @@ class Meal(db.Model):
         return dict(
             id=self.id,
             meal_name=self.meal_name,
-            menu_items=[menu.json_dump() for menu in self.menu_items],
+            meal_items=[menu.json_dump() for menu in self.meal_items],
             date_created=str(self.date_created)
         )
 
@@ -91,9 +94,11 @@ class Menu(db.Model):
     """
     __tablename__ = 'menus'
     id = db.Column(db.Integer, primary_key=True)
-    menu_item = db.Column(db.String(100), nullable=False)
+    meal_item = db.Column(db.String(100), nullable=False)
     meal_id = db.Column(db.Integer, db.ForeignKey(
         'meals.id', ondelete='CASCADE'))
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'users.id', ondelete='CASCADE'))
     date_created = db.Column(
         db.TIMESTAMP, server_default=db.func.current_timestamp(),
         nullable=False)
@@ -103,7 +108,7 @@ class Menu(db.Model):
         return dict(
             id=self.id,
             meal_id=self.meal_id,
-            menu_item=self.menu_item,
+            meal_item=self.meal_item,
             date_created=str(self.date_created))
 
     def save(self):

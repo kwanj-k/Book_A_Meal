@@ -8,7 +8,7 @@ from app.models import db, Meal, User
 from .validators import require_admin, name_validator, space_stripper
 
 
-class MealResource(Resource):
+class Meals(Resource):
     """
     Meal Resource with GET, POST, PUT and DELETE methods
     """
@@ -68,7 +68,7 @@ class MealResource(Resource):
             return {"status": "deleted!", "data": response}, 200
 
 
-class MealListResource(Resource):
+class MealList(Resource):
     """
     MealList resource that has a get and post method.
     """
