@@ -1,3 +1,4 @@
+""" Meals endpoints test cases"""
 import unittest
 import json
 
@@ -22,13 +23,16 @@ class TestMeal(unittest.TestCase):
             "email": "email@gmail.com",
             "password": "kwanjkay",
             "is_admin": "true"}
+
         self.data = {"meal_name": "Brunch"}
         self.data1 = {"meal_name": "Lunch"}
+
         with self.app.app_context():
             """ create all tables """
             db.session.close()
             db.drop_all()
             db.create_all()
+
         self.client().post("api/v2/auth/register", data=json.dumps(self.userdata),
                            content_type='application/json')
         login = self.client().post('/api/v2/auth/login', data=json.dumps(self.userdata),
@@ -36,11 +40,13 @@ class TestMeal(unittest.TestCase):
         self.token = json.loads(login.data.decode()).get('token')
 
     def test_get_meals(self):
+        """ Test get all meals endpoint"""
         res = self.client().get('/api/v2/meals',
                                 headers=dict(Authorization="Bearer " + self.token))
         self.assertEqual(res.status_code, 200)
 
     def test_create_meals(self):
+        """ Test the create meals endpoint"""
         res = self.client().post('/api/v2/meals',
                                  data=json.dumps(self.data),
                                  content_type="application/json",
@@ -48,6 +54,7 @@ class TestMeal(unittest.TestCase):
         self.assertEqual(res.status_code, 201)
 
     def test_get_meal_by_id(self):
+        """ Test get meal by id endpoint"""
         self.client().post("/api/v2/meals",
                            data=json.dumps(self.data),
                            content_type="application/json",
@@ -58,6 +65,7 @@ class TestMeal(unittest.TestCase):
         self.assertEqual(res2.status_code, 200)
 
     def test_meal_update(self):
+        """Test the meal update endpoint"""
         self.client().post('/api/v2/meals',
                            data=json.dumps(self.data),
                            content_type="application/json",
@@ -69,6 +77,7 @@ class TestMeal(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_meal_delete(self):
+        """"Test the delete meal endpoint"""
         self.client().post('/api/v2/meals',
                            data=json.dumps(self.data),
                            content_type="application/json",

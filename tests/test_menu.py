@@ -1,3 +1,4 @@
+""" Testcases for menus endpoints"""
 import unittest
 import json
 
@@ -42,11 +43,13 @@ class TestMenu(unittest.TestCase):
                            headers=dict(Authorization="Bearer " + self.token))
 
     def test_get_menus(self):
+        """Test get all meal items endpoints"""
         res = self.client().get('/api/v2/menus',
                                 headers=dict(Authorization="Bearer " + self.token))
         self.assertEqual(res.status_code, 200)
 
     def test_create_menus(self):
+        """Test create meal items endpoint"""
         res = self.client().post('/api/v2/menus',
                                  data=json.dumps(self.data),
                                  content_type="application/json",
@@ -54,6 +57,7 @@ class TestMenu(unittest.TestCase):
         self.assertEqual(res.status_code, 201)
 
     def test_get_menu_by_id(self):
+        """ Test get meal item by id"""
         self.client().post("/api/v2/menus",
                            data=json.dumps(self.data),
                            content_type="application/json",
@@ -64,6 +68,7 @@ class TestMenu(unittest.TestCase):
         self.assertEqual(res2.status_code, 200)
 
     def test_menu_update(self):
+        """ Test meal item update"""
         self.client().post('/api/v2/menus',
                            data=json.dumps(self.data),
                            content_type="application/json",
@@ -75,6 +80,7 @@ class TestMenu(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_menu_delete(self):
+        """Test meal item deletion"""
         self.client().post('/api/v2/menus',
                            data=json.dumps(self.data),
                            content_type="application/json",

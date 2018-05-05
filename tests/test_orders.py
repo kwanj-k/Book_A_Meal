@@ -1,3 +1,4 @@
+""" Testcases for the orders endpoints"""
 import unittest
 import json
 
@@ -47,11 +48,13 @@ class TestOrder(unittest.TestCase):
                            headers=dict(Authorization="Bearer " + self.token))
 
     def test_get_orders(self):
+        """Test get all orders enpoint"""
         res = self.client().get('/api/v2/orders',
                                 headers=dict(Authorization="Bearer " + self.token))
         self.assertEqual(res.status_code, 200)
 
     def test_create_orders(self):
+        """ Test create orders endpoint"""
         res = self.client().post('/api/v2/orders',
                                  data=json.dumps(self.data),
                                  content_type="application/json",
@@ -59,6 +62,7 @@ class TestOrder(unittest.TestCase):
         self.assertEqual(res.status_code, 201)
 
     def test_get_order_by_id(self):
+        """Test get order by id """
         self.client().post("/api/v2/orders",
                            data=json.dumps(self.data),
                            content_type="application/json",
@@ -69,6 +73,7 @@ class TestOrder(unittest.TestCase):
         self.assertEqual(res2.status_code, 200)
 
     def test_order_update(self):
+        """Test order update endpoint"""
         self.client().post('/api/v2/orders',
                            data=json.dumps(self.data),
                            content_type="application/json",
@@ -80,6 +85,7 @@ class TestOrder(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_order_delete(self):
+        """Test order delete endpoint"""
         self.client().post('/api/v2/orders',
                            data=json.dumps(self.data),
                            content_type="application/json",
