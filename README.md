@@ -1,5 +1,5 @@
 ### Book_A_Meal_The_App
-[![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=api-v2)](https://travis-ci.org/kwanj-k/Book_A_Meal)  [![Coverage Status](https://coveralls.io/repos/github/kwanj-k/Book_A_Meal/badge.svg?branch=api-v2)](https://coveralls.io/github/kwanj-k/Book_A_Meal?branch=api-v2)
+[![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=api-v2)](https://travis-ci.org/kwanj-k/Book_A_Meal) [![Coverage Status](https://coveralls.io/repos/github/kwanj-k/Book_A_Meal/badge.svg?branch=api-v2)](https://coveralls.io/github/kwanj-k/Book_A_Meal?branch=api-v2)
 
 
 This is an Application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
