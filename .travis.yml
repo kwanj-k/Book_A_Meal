@@ -12,7 +12,7 @@ services:
   - postgresql
 before_script:
   - source ./.travis.sh
-  - psql -c 'create database ${TEST_DBURL};' -U postgres
+  - psql -c 'create database ${TEST_DATABASE_URI};' -U postgres
 script: 
   - nosetests --with-coverage --cover-package app
 after_success:
