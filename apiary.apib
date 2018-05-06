@@ -4,14 +4,14 @@ HOST: http://127.0.0.1:5000/api/v2
 
 
 # Book_A_Meal API
-Book_A_Meal is an application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
-This is the api docs for the app.
+Book_a_Meal is an application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
+This is the API documentation.
 
 # Group Authenitication
 
 Resources related to User Registration and Login.
 
-## SignUp Collection [POST /auth/register]
+## SignUp [POST /auth/register]
 + Request
     + Headers
 
@@ -28,7 +28,7 @@ Resources related to User Registration and Login.
         - token: <token> string - The token
 
 
-## Login Collection [POST /auth/login]
+## Login [POST /auth/login]
 
 + Request
     
@@ -49,7 +49,7 @@ Resources related to User Registration and Login.
 
 Resources related to the meals in the API.
 
-## Meals Collection [/meals]
+## Meals  [/meals]
 
 ### List All Meals [GET]
 
@@ -80,8 +80,7 @@ Resources related to the meals in the API.
 
     
 
-### Meal [GET /meals/{id}]
-Get a meal by id
+### Get meal by id [GET /meals/{id}]
 + Request
     + Headers
 
@@ -125,9 +124,9 @@ Get a meal by id
 
 Resources related to the menus in the API.
 
-## Menus Collection [/menus]
+## Menus  [/menus]
 
-### List All Menus [GET]
+### List All Menu items [GET]
 
 + Request
     + Headers
@@ -137,7 +136,7 @@ Resources related to the menus in the API.
 
 + Response 200 (application/json)
 
-### Create a New Menu [POST]
+### Create a New Menu item [POST]
 
 + Request
     + Headers
@@ -157,8 +156,7 @@ Resources related to the menus in the API.
 
     
 
-### Menu [GET /menus/{id}]
-Get a menu item by id
+### Get menu item by id [GET /menus/{id}]
 + Request
     + Headers
 
@@ -170,7 +168,7 @@ Get a menu item by id
 
 + Response 200 (application/json)
 
-### Edit a Menu [PUT /menus/{id}]
+### Edit a Menu item [PUT /menus/{id}]
 
 + Request
     + Headers
@@ -186,7 +184,7 @@ Get a menu item by id
     
 + Response 200 (application/json)
 
-### Delete a Menu [DELETE /menus/{id}]
+### Delete a Menu item [DELETE /menus/{id}]
 
 + Request
     + Headers
@@ -202,7 +200,7 @@ Get a menu item by id
 
 Resources related to the orders in the API.
 
-## Orders Collection [/orders]
+## Orders [/orders]
 
 ### List All Orders [GET]
 
@@ -234,8 +232,7 @@ Resources related to the orders in the API.
 
     
 
-### Menu [GET /orders/{id}]
-Get a menu item by id
+### Get an order by id [GET /orders/{id}]
 + Request
     + Headers
 
@@ -263,7 +260,7 @@ Get a menu item by id
     
 + Response 200 (application/json)
 
-### Delete a Orders [DELETE /orders/{id}]
+### Delete an Order [DELETE /orders/{id}]
 
 + Request
     + Headers
