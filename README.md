@@ -6,7 +6,7 @@ This is an Application that allows customers to make food orders and helps the f
 
 The application is managed using PivotalTracker board, [click here](https://www.pivotaltracker.com/n/projects/2165483) to see.
 
-To see the API docs [click here](https://app.apiary.io/bookameal6/)
+<!-- To see the API docs [click here](https://app.apiary.io/bookameal6/) -->
 ### Getting Started 
 
 Clone the repository: 
@@ -27,44 +27,87 @@ Pull the branch with the API.
 ```
 
 ### Installing
-Create a virtualenv and activate it. [Refer here](https://docs.python.org/3/tutorial/venv.html)
+Create a virtualenv and activate it.. [Refer here](https://docs.python.org/3/tutorial/venv.html)
+
+Also make sure to setup postgres on your local machine.[Refer here](Ubuntu)(https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
+
+If you are on windows,[Refer here](https://www.postgresql.org/download/windows/)
+
 - Install the project dependencies:
 > $ pip install -r requirements.txt
 - On your terminal with the env still activated.Run:
+
 > $ export FLASK_APP="manage.py"
 
-> $ export APP_SETTINGS="development"
+> $ export SECRET="some-very-long-string-of-random-things"
+
+> $ export FLASK_DEBUG=1
 
 ### Running Tests
+To run tests,you will need to configure a database to run the tests on.
 
-After setting up the above. Run:
+Run the following on your terminal.
 
-``` nosetests --with-coverage --cover-package app```
+> $ createdb tetst_db
+
+> $ export TestDB_URL="postgresql://@localhost/test_db"
+
+> $ export APP_SETTINGS="testing"
+
+> $ python manage.py db init
+
+> $ python manage.py db migrate
+
+> $ python manage.py db upgrade
+
+> $ nosetests --with-coverage --cover-package app
 
 This should run all the tests and give test coverage.  
 
 ### Testing API EndPoints
-Start the development server with:
+We will need different configuration to test the endpoints.
+On your terminal with the enviroment activated.Run:
+
+> $ export APP_SETTINGS="development"
+
+> $ createdb book_a_meal
+
+> $ export DevDB_URL="postgresql://@localhost/book_a_meal"
+
+> $ python manage.py db init
+
+> $ python manage.py db migrate
+
+> $ python manage.py db upgrade
+
 > $ flask run
+
+``` flask run ``` Should should start your local development server,from there you good to go.
 
 FireUp PostMan and test the different API endpoints from the table below. 
 
 Ensure the URLs are prefixed with ``` /api/v2 ```
 
 
-| EndPoint                       | Functionality                           | 
-| -------------------------------|:---------------------------------------:|
-| POST     /auth/signup          | Register a user                         | 
-| POST     /auth/login           | Login a user                            |
-| GET      /meals/               | Get all the meal options                |
-| POST     /meals/               | Add a meal option                       | 
-| PUT      /meals/<mealId>       | Update the information of a meal option |
-| DELETE   /meals/<mealId>       | Remove a meal option                    |
-| POST     /menu/                | Setup the menu for the day              | 
-| GET      /menu/                | Get the menu for the day                |
-| POST     /orders               | Select the meal and menu item           |
-| PUT      /orders/orderId       | Modify an order                         | 
-| GET      /orders               | Get all the orders                      |
+| EndPoint                       | Functionality                           | Restriction                |
+| -------------------------------|:---------------------------------------:|:--------------------------:|
+| POST     /auth/signup          | Register a user                         | None                       |
+| POST     /auth/login           | Login a user                            | None                       |
+| GET      /meals/               | Get all the meal options                | Admin users only           |
+| GET      /meals/ <mealId>      | Get  a meal by id                       | Admin users only           |
+| POST     /meals/               | Add a meal option                       | Admin users only           |
+| PUT      /meals/<mealId>       | Update the information of a meal option | Admin users only           |
+| DELETE   /meals/<mealId>       | Remove a meal option                    | Admin users only           |
+| GET      /menus/               | Get all the meal items options          | All users                  |
+| GET      /menus/ <menuId>      | Get  a meal item by id                  | All users                  |
+| POST     /menus/               | Setup the mealitem                      | Admin users only           |
+| PUT      /menus/<menuId>       | Update the information of a meal item   | Admin users only           |
+| DELETE   /menus/<menuId>       | Remove a meal item                      | Admin users only           |
+| GET      /orders/              | Get all the orders                      | Admin users only           |
+| GET      /orders/<orderId>     | Get  an order by id                     | Admin users only           |
+| POST     /orders/              | Create an order                         | All users                  |
+| PUT      /orders/<orderId>     | Update the information of an order      | All users                  |
+| DELETE   /orders/<orderId>     | Remove an order                         | All users                  |
 
 ## Authors
 
