@@ -11,7 +11,6 @@ install:
 services:
   - postgresql
 before_script:
-  - source ./.travis.sh
   - psql -c 'create database travis_ci_test;' -U postgres
 script: 
   - nosetests --with-coverage --cover-package app
