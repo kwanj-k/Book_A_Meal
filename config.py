@@ -18,7 +18,7 @@ class TestingConfig(Config):
     """Configurations for Testing, with a separate test database."""
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.getenv('TestDB_URL')
-    SQLALCHEMY_DATABASE_URI =  'postgresql://localhost/travis_test'
+    SQLALCHEMY_DATABASE_URI =  'postgresql://localhost/test'
     DEBUG = True
 
 
