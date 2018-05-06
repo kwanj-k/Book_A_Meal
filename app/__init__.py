@@ -1,6 +1,6 @@
 """ App module to bring together the whole app."""
 
-from flask import Flask
+from flask import Flask,send_from_directory
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
@@ -25,6 +25,11 @@ def create_app(config_name):
     jwt.init_app(app)
     from app.models import db
     db.init_app(app)
+
+    @app.route('/')
+    def api_docs():
+        """ Route to the api docs"""
+        return send_from_directory('../api-docs', 'index.html')
 
     api.add_resource(MealList, '/api/v2/meals')
     api.add_resource(Meals, '/api/v2/meals/<int:id>')
