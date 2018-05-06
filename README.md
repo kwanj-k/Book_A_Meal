@@ -1,4 +1,4 @@
-### Book_A_Meal_The_App
+### Book_A_Meal
 [![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=api-v2)](https://travis-ci.org/kwanj-k/Book_A_Meal) [![Coverage Status](https://coveralls.io/repos/github/kwanj-k/Book_A_Meal/badge.svg?branch=api-v2)](https://coveralls.io/github/kwanj-k/Book_A_Meal?branch=api-v2)
 
 
