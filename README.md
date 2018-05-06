@@ -29,9 +29,9 @@ Pull the branch with the API.
 ### Installing
 Create a virtualenv and activate it.. [Refer here](https://docs.python.org/3/tutorial/venv.html)
 
-Also make sure to setup postgres on your local machine.[Refer here](Ubuntu)(https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
+Also make sure to setup postgres on your local machine.[Refer here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
 
-If you are on windows,[Refer here](https://www.postgresql.org/download/windows/)
+If on windows,[Refer here](https://www.postgresql.org/download/windows/)
 
 - Install the project dependencies:
 > $ pip install -r requirements.txt
@@ -94,20 +94,20 @@ Ensure the URLs are prefixed with ``` /api/v2 ```
 | POST     /auth/signup          | Register a user                         | None                       |
 | POST     /auth/login           | Login a user                            | None                       |
 | GET      /meals/               | Get all the meal options                | Admin users only           |
-| GET      /meals/ <mealId>      | Get  a meal by id                       | Admin users only           |
+| GET      /meals/Id/            | Get  a meal by id                       | Admin users only           |
 | POST     /meals/               | Add a meal option                       | Admin users only           |
-| PUT      /meals/<mealId>       | Update the information of a meal option | Admin users only           |
-| DELETE   /meals/<mealId>       | Remove a meal option                    | Admin users only           |
+| PUT      /meals/Id/            | Update the information of a meal option | Admin users only           |
+| DELETE   /meals/Id/            | Remove a meal option                    | Admin users only           |
 | GET      /menus/               | Get all the meal items options          | All users                  |
-| GET      /menus/ <menuId>      | Get  a meal item by id                  | All users                  |
+| GET      /menus/Id/            | Get  a meal item by id                  | All users                  |
 | POST     /menus/               | Setup the mealitem                      | Admin users only           |
-| PUT      /menus/<menuId>       | Update the information of a meal item   | Admin users only           |
-| DELETE   /menus/<menuId>       | Remove a meal item                      | Admin users only           |
+| PUT      /menus/Id/            | Update the information of a meal item   | Admin users only           |
+| DELETE   /menus/Id/            | Remove a meal item                      | Admin users only           |
 | GET      /orders/              | Get all the orders                      | Admin users only           |
-| GET      /orders/<orderId>     | Get  an order by id                     | Admin users only           |
+| GET      /orders/Id/           | Get  an order by id                     | Admin users only           |
 | POST     /orders/              | Create an order                         | All users                  |
-| PUT      /orders/<orderId>     | Update the information of an order      | All users                  |
-| DELETE   /orders/<orderId>     | Remove an order                         | All users                  |
+| PUT      /orders/Id/           | Update the information of an order      | All users                  |
+| DELETE   /orders/Id/           | Remove an order                         | All users                  |
 
 ## Authors
 
