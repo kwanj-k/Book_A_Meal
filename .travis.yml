@@ -2,19 +2,17 @@ language: python
 
 python:
   - 3.5.2
-
-cache: pip
+before_install:
+   - pip install -U pip
+   - python setup.py install
 
 install:
   - pip install -r requirements.txt
-
 services:
   - postgresql
 before_script:
-  - source ./.travis.sh
   - psql -c "CREATE DATABASE test_db;" -U postgres
 script: 
   - nosetests --with-coverage --cover-package app
 after_success:
   - coveralls
-
