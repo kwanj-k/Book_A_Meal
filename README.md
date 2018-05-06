@@ -1,5 +1,5 @@
 ### Book_A_Meal
-[![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=api-v2)](https://travis-ci.org/kwanj-k/Book_A_Meal) [![Coverage Status](https://coveralls.io/repos/github/kwanj-k/Book_A_Meal/badge.svg?branch=api-v2)](https://coveralls.io/github/kwanj-k/Book_A_Meal?branch=api-v2)
+[![Build Status](https://travis-ci.org/kwanj-k/Book_A_Meal.svg?branch=develop)](https://travis-ci.org/kwanj-k/Book_A_Meal) [![Coverage Status](https://coveralls.io/repos/github/kwanj-k/Book_A_Meal/badge.svg?branch=api-v2)](https://coveralls.io/github/kwanj-k/Book_A_Meal?branch=api-v2)
 
 
 This is an Application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
@@ -63,6 +63,10 @@ Run the following on your terminal.
 > $ nosetests --with-coverage --cover-package app
 
 This should run all the tests and give test coverage.  
+
+### Nosetests
+
+The above tests are meant to test the functionality of all the endpoints and verify they are working.
 
 ### Testing API EndPoints
 We will need different configuration to test the endpoints.
