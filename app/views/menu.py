@@ -24,10 +24,8 @@ class Menus(Resource):
         menu = Menu.query.filter_by(id=id).first()
         if menu is None:
             return {"status": "Failed!!", "message": "Meal item does not exist."}, 404
-        if menu.user_id == current_user.id:
-            response = menu.json_dump()
-            return response
-        return {"status": "Failed!", "message": "Meal does not exist."}, 404
+        response = menu.json_dump()
+        return response
 
     @jwt_required
     @require_admin
@@ -92,10 +90,7 @@ class MenuList(Resource):
         """
         Method to get all menus.
         """
-        current_user = User.query.filter_by(email=get_jwt_identity()).first()
-        menus = Menu.query.filter_by(user_id=current_user.id)
-        if menus is None:
-            return{"message": "You do not have menus at the moment."}, 404
+        menus = Menu.query.all()
         response = [menu.json_dump() for menu in menus]
         return {"status": "success", "data": response}, 200
 
