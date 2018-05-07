@@ -2,9 +2,7 @@
 
 from flask import json, request
 from flask_restful import Resource
-from flask_jwt_extended import (
-    JWTManager, jwt_required, create_access_token,
-    get_jwt_identity)
+from flask_jwt_extended import create_access_token
 
 from app.models import db, User
 from .validators import (email_validator,
@@ -23,7 +21,7 @@ class Register(Resource):
         json_data = request.get_json(force=True)
         if 'username' not in json_data or \
                 'email' not in json_data or 'password' not in json_data or 'is_admin' not in json_data:
-            return {"status": "Failed!","message": "Please supply username,email,password and whether admin"}, 406
+            return {"status": "Failed!", "message": "Please supply username,email,password and whether admin"}, 406
         user = User.query.filter_by(email=json_data['email']).first()
         if not user:
             if not email_validator(json_data['email']):

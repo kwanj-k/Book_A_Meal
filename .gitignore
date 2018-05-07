@@ -17,3 +17,4 @@ pyc
 .coverage
 *env
 *pyc
+migrations/
