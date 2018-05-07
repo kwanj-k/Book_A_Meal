@@ -1,13 +1,15 @@
 language: python
+
 python:
   - 3.5.2
 install:
   - pip install -r requirements.txt
-<<<<<<< HEAD
-env:
-  - FLASK_VERSION=0.12.2
+services:
+  - postgresql
+before_script:
+  - source ./.travis.sh
+  - psql -c 'create database test;' -U postgres
 script: 
   - nosetests --with-coverage --cover-package app
-
 after_success:
   - coveralls

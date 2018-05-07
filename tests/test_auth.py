@@ -1,9 +1,10 @@
-from app import create_app
+""" Authenitication test cases"""
+
 import unittest
 import json
+from app import create_app
+from app.models import db
 
-config_name = "testing"
-app = create_app(config_name)
 
 class TestAuthenitication(unittest.TestCase):
     """
@@ -11,58 +12,52 @@ class TestAuthenitication(unittest.TestCase):
     """
 
     def setUp(self):
-        app.testing = True
-        self.app = app.test_client()
-        self.data = {"username":"zeus",
-        				 "email":"email@gmail.com",
-        				 "password":"4084",
-                         "user_type":1
-                  
-                         }
-        self.data2 = {"username":"kwanj",
-        				 "email":"kwanj@gmail.com",
-        				 "password":"4084",
-                         "user_type":2
-                  
-                         }
-        self.data3 = {"username":"kelvin",
-        				 "email":"kelvin@gmail.com",
-        				 "password":"4084",
-                         "user_type":1
-                  
-                         }
-        self.data1 = {
-        				 "email":"email@gmail.com",
-        				 "password":"4084",
-                         }
+        """ Set up test Variables"""
+        self.app = create_app(config_name="testing")
+        # initialize the test client
+        self.client = self.app.test_client
+        self.data = {
+            "username": "zeus",
+            "email": "email@gmail.com",
+            "password": "kwanjkay",
+            "is_admin": "true"
+        }
+        with self.app.app_context():
+            """ create all tables """
+            db.session.close()
+            db.drop_all()
+            db.create_all()
 
-    def test_register(self):
-        res = self.app.post("/api/v1/auth/register", 
-                    data=json.dumps(self.data),
-                            content_type='application/json')
-        self.assertEqual(res.status_code,201 )
-       
+    def test_registration(self):
+        """ Verify user registration works correctly """
+        res = self.client().post("api/v2/auth/register", data=json.dumps(self.data),
+                                 content_type='application/json')
+        self.assertEqual(res.status_code, 201)
+
+    def test_already_registered_user(self):
+        """Verify that a user cannot be registered twice."""
+        res = self.client().post('/api/v2/auth/register', data=json.dumps(self.data),
+                                 content_type='application/json')
+        self.assertEqual(res.status_code, 201)
+        second_res = self.client().post('/api/v2/auth/register', data=json.dumps(self.data),
+                                        content_type='application/json')
+        self.assertEqual(second_res.status_code, 202)
+
     def test_login(self):
-        user = {"username":"catsand rain",
-        				 "email":"fu@gmail.com",
-        				 "password":"4084",
-                         "user_type":1
-                  
-                         }
-        self.app.post("/api/v1/auth/login", 
-                    data=json.dumps(user),
-                            content_type='application/json')
-        res    = self.app.post("/api/v1/auth/login", 
-                    data=json.dumps(user),
-                             content_type='application/json')
-        self.assertEqual(res.status_code, 200)
+        """ Verify a registered user can login"""
+        res = self.client().post('/api/v2/auth/register', data=json.dumps(self.data),
+                                 content_type='application/json')
+        self.assertEqual(res.status_code, 201)
+        login_response = self.client().post('/api/v2/auth/login', data=json.dumps(self.data),
+                                            content_type='application/json')
+        self.assertEqual(login_response.status_code, 200)
 
-    def test_double_registration(self):
-        res = self.app.post("/api/v1/auth/register", 
-                    data=json.dumps(self.data2),
-                            content_type='application/json')
-        self.assertEqual(res.status_code,201 )
-        res = self.app.post("/api/v1/auth/register", 
-                    data=json.dumps(self.data2),
-                            content_type='application/json')
-        self.assertEqual(res.status_code,409 )                  
+    def test_non_registered_user_login(self):
+        """Test non registered users cannot login."""
+        not_a_user = {
+            'email': 'cuhicuhi@example.com',
+            'password': 'yesnoyesno'
+        }
+        res = self.client().post('/api/v2/auth/login', data=json.dumps(not_a_user),
+                                 content_type='application/json')
+        self.assertEqual(res.status_code, 401)
