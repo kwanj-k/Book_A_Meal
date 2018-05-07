@@ -1,0 +1,272 @@
+FORMAT: 1A
+
+HOST:https://bam-v2.herokuapp.com/api/v2
+
+
+# Book_A_Meal API
+Book_a_Meal is an application that allows customers to make food orders and helps the food vendor know what the customers want to eat.
+This is the API documentation.
+
+# Group Authenitication
+
+Resources related to User Registration and Login.
+
+## SignUp [POST /auth/register]
++ Request
+    + Headers
+
+            Content-Type: application/json
+    
+    + Attributes
+        - username: username (string, required)- Username
+        - email: emai@mail.com (string , required) - User email
+        - password: password (string, required) - User password
+        - is_admin: true (string, required) - User type
+
++ Response 201 (application/json)
+    + Attributes
+        - token: <token> string - The token
+
+
+## Login [POST /auth/login]
+
++ Request
+    
+    + Headers
+
+            Content-Type: application/json
+    
+    + Attributes
+        - email: email@email.com (string, required)- User email
+        - password: password (string, required) - user password
+
++ Response 201 (application/json)
+    + Attributes
+        - token: <token> string - The token
+
+
+# Group Meals
+
+Resources related to the meals in the API.
+
+## Meals  [/meals]
+
+### List All Meals [GET]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
++ Response 200 (application/json)
+
+### Create a New Meal [POST]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
+    + Attributes
+        + meals 
+            - meal_name: Brunch (string, required) - Meal name
+
++ Response 201 (application/json)
+    + Attributes
+        - status: 201 (number) - The response status
+
+    
+
+### Get meal by id [GET /meals/{id}]
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
++ Parameter
+    + id: 1 - The ID of the meal
+
++ Response 200 (application/json)
+
+### Edit a Meal [PUT /meals/{id}]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
+    + Attributes
+        - meal_name: `Lunch` (string)
++ Parameter
+    + id: 1 - The ID of the meal
+    
++ Response 200 (application/json)
+
+### Delete a Meal [DELETE /meals/{id}]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
++ Parameter
+    + id: 1 - The ID of the meal
+
++ Response 200 (application/json)
+
+# Group Menus
+
+Resources related to the menus in the API.
+
+## Menus  [/menus]
+
+### List All Menu items [GET]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
++ Response 200 (application/json)
+
+### Create a New Menu item [POST]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
+    + Attributes
+        + menus
+            - meal_item: Pancake (string, required) - Meal name
+            - meal_id: 1 (number, required) - Meal id
+
++ Response 201 (application/json)
+    + Attributes
+        - status: 201 (number) - The response status
+
+    
+
+### Get menu item by id [GET /menus/{id}]
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
++ Parameter
+    + id: 1 - The ID of the meal
+
++ Response 200 (application/json)
+
+### Edit a Menu item [PUT /menus/{id}]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
+    + Attributes
+        - meal_item: `pancake1` (string)
+        - meal_id: 1 (number)
++ Parameter
+    + id: 1 - The ID of the meal
+    
++ Response 200 (application/json)
+
+### Delete a Menu item [DELETE /menus/{id}]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
++ Parameter
+    + id: 1 - The ID of the meal
++ Response 200 (application/json)    
+
+# Group Orders
+
+Resources related to the orders in the API.
+
+## Orders [/orders]
+
+### List All Orders [GET]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
++ Response 200 (application/json)
+
+### Create a New Order [POST]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
+    + Attributes
+        + menus (array)
+            + (object)
+                - item_id: 1 (number, required) - Meal_item id
+                - quantity: 1 (number, required) - quantity
+
++ Response 201 (application/json)
+    + Attributes
+        - status: 201 (number) - The response status
+
+    
+
+### Get an order by id [GET /orders/{id}]
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
++ Parameter
+    + id: 1 - The ID of the meal
+
++ Response 200 (application/json)
+
+### Edit a Orders [PUT /orders/{id}]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
+    + Attributes
+        - item_id: 1 (number, required)
+        - quantity: 3 (number, required)
++ Parameter
+    + id: 1 - The ID of the meal
+    
++ Response 200 (application/json)
+
+### Delete an Order [DELETE /orders/{id}]
+
++ Request
+    + Headers
+
+            Content-Type: application/json
+            Authorization: Bearer <TOKEN>
+
++ Parameter
+    + id: 1 - The ID of the meal
+
++ Response 200 (application/json)
