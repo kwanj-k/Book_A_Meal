@@ -52,8 +52,6 @@ Run the following on your terminal.
 
 > $ createdb tetst_db
 
-> $ export TestDB_URL="postgresql://@localhost/test_db"
-
 > $ export APP_SETTINGS="testing"
 
 > $ python manage.py db init
