@@ -2,9 +2,7 @@
 
 from flask import json, request
 from flask_restful import Resource
-from flask_jwt_extended import (
-    JWTManager, jwt_required, create_access_token,
-    get_jwt_identity)
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.models import db, Menu, Meal, User
 from .validators import require_admin, space_stripper, name_validator, num_check
@@ -20,7 +18,6 @@ class Menus(Resource):
         """
         Method gets a menu by id.
         """
-        current_user = User.query.filter_by(email=get_jwt_identity()).first()
         menu = Menu.query.filter_by(id=id).first()
         if menu is None:
             return {"status": "Failed!!", "message": "Meal item does not exist."}, 404

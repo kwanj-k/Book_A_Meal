@@ -102,7 +102,12 @@ class OrderList(Resource):
                     "message": "Please supply  item id and quantity"}, 406
         if not num_check(json_data['item_id']) or not num_check(json_data['quantity']):
             return {"status": "Failed!", "message": "Item and quantity id must be integers"}, 406
-
+        try:
+            json_data['quantity'] = int(json_data['quantity'])
+        except ValueError:
+            return {"message": "error"}
+        if json_data['quantity'] < 1:
+            return {"status": "Failed!", "message": "You not order negative items."}, 406
         item_id = json_data['item_id']
         quantity = json_data['quantity']
         item = Menu.query.filter_by(id=item_id).first()

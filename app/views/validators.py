@@ -20,7 +20,7 @@ def bool_transform(data):
     if strng == "true":
         return True
     if strng == "false":
-        return False
+cd         return False
     else:
         return {"message": "Please enter true or false in the admin field"}, 406
 
@@ -28,8 +28,9 @@ def bool_transform(data):
 def num_check(data):
     """ Method to validate integer inputs"""
 
-    if re.match("^[-+]?[0-9]+$", str(data)):
+    if re.match("^[-+]?[0-9]+$", str(data)) and if :
         return True
+
 
 
 def email_validator(email):

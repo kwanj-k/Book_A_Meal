@@ -1,6 +1,6 @@
 """ App module to bring together the whole app."""
 
-from flask import Flask,send_from_directory
+from flask import Flask, send_from_directory
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
@@ -20,7 +20,7 @@ def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.url_map.strict_slashes = False
-    app.config['JWT_SECRET_KEY'] = 'super-secret-key-that'
+    app.config['JWT_SECRET_KEY'] = 'super-secret-key'
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=72)
     jwt.init_app(app)
     from app.models import db
