@@ -28,9 +28,8 @@ def bool_transform(data):
 def num_check(data):
     """ Method to validate integer inputs"""
 
-    if re.match("^[-+]?[0-9]+$", str(data)) :
+    if re.match("^[-+]?[0-9]+$", str(data)):
         return True
-
 
 
 def email_validator(email):
