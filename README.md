@@ -6,7 +6,7 @@ This is an Application that allows customers to make food orders and helps the f
 
 The application is managed using PivotalTracker board, [click here](https://www.pivotaltracker.com/n/projects/2165483) to see.
 
-To see the API docs [click here](https://bookameal6.docs.apiary.io/#)
+To see the API docs [click here](https://bam-v2.herokuapp.com/)
 ### Getting Started 
 
 Clone the repository: 
